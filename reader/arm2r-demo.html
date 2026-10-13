@@ -1,0 +1,16 @@
+<div class="arm-demo" data-arm2r-demo>
+  <div class="demo-head"><strong>交互实验 · 2R 平面机械臂</strong><span>完全离线</span></div>
+  <svg class="demo-svg" viewBox="0 0 600 390" role="img" aria-label="二维二连杆机械臂的关节与末端速度矢量">
+    <defs><marker id="demo-velocity-head" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#ba5063"/></marker></defs>
+    <g class="gridlines" stroke-width="1"><path d="M40 65H570M40 130H570M40 195H570M40 260H570M40 325H570M70 15V365M135 15V365M200 15V365M265 15V365M330 15V365M395 15V365M460 15V365M525 15V365"/></g>
+    <line class="axis" x1="35" y1="195" x2="575" y2="195" stroke-width="1.5"/><line class="axis" x1="300" y1="355" x2="300" y2="15" stroke-width="1.5"/>
+    <text x="557" y="185">x</text><text x="313" y="25">y</text>
+    <line class="l1 arm-line"/><line class="l2 arm-line"/><circle cx="300" cy="195" r="9" class="joint"/><circle class="joint joint-two" r="8"/><circle class="end" r="7"/>
+    <line class="velocity" marker-end="url(#demo-velocity-head)"/>
+    <text x="306" y="218">基座</text><text x="32" y="375">L₁ = 1.0 m · L₂ = 0.7 m</text>
+  </svg>
+  <div class="demo-controls"><div class="demo-control"><label>关节一 θ₁ <output data-q1-out>35°</output></label><input type="range" data-q1 min="-180" max="180" value="35" step="1" aria-label="关节一角度"></div><div class="demo-control"><label>关节二 θ₂ <output data-q2-out>65°</output></label><input type="range" data-q2 min="-180" max="180" value="65" step="1" aria-label="关节二角度"></div></div>
+  <div class="demo-metrics"><div class="demo-metric"><small>末端位置 (m)</small><strong data-xy-out></strong></div><div class="demo-metric"><small>末端速度 (m/s)</small><strong data-v-out></strong></div><div class="demo-metric"><small>det J (m²)</small><strong data-det-out></strong></div></div>
+  <p class="demo-warning" data-warning aria-live="polite"></p>
+  <p class="demo-foot">固定关节角速度为 θ̇₁ = 0.8 rad/s，θ̇₂ = −0.5 rad/s；最小奇异值 σ_min = <span data-sigma-out></span>；请尝试将 θ₂ 设为 0°、180° 并观察变化</p>
+</div>

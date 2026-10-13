@@ -1,0 +1,414 @@
+project: Modern Robotics Curriculum
+title: 现代机器人学：建模、规划、感知、控制与智能
+source_of_truth: Markdown
+levels:
+- core
+- advanced
+- practice
+status_values:
+- planned
+- draft
+- review
+- verified
+parts:
+- id: 01-foundations
+  title: 第一篇：数学与机器人机构基础
+  chapters:
+  - id: F01
+    title: 机器人学导论
+    path: book/01-foundations/F01-robotics-introduction.md
+    status: review
+    prerequisites: []
+    scope: 机器人系统、自由度、建模—规划—控制—感知闭环
+  - id: F02
+    title: 线性代数基础
+    path: book/01-foundations/F02-linear-algebra.md
+    status: review
+    prerequisites: []
+    scope: 向量矩阵、特征值、正交分解、SVD、条件数
+  - id: F03
+    title: 微积分与动态系统
+    path: book/01-foundations/F03-calculus-dynamical-systems.md
+    status: review
+    prerequisites:
+    - F02
+    scope: 多元微分、梯度、微分方程、离散化
+  - id: F04
+    title: 概率与数学优化
+    path: book/01-foundations/F04-probability-optimization.md
+    status: review
+    prerequisites:
+    - F02
+    - F03
+    scope: 概率、协方差、最小二乘、凸优化、约束优化
+  - id: F05
+    title: 刚体空间表示
+    path: book/01-foundations/F05-rigid-body-representations.md
+    status: review
+    prerequisites:
+    - F02
+    scope: 旋转矩阵、欧拉角、四元数、齐次变换、坐标系
+  - id: F06
+    title: 旋量与李群李代数
+    path: book/01-foundations/F06-twists-lie-groups.md
+    status: review
+    prerequisites:
+    - F05
+    - F03
+    scope: SO(3)、SE(3)、指数与对数映射、伴随变换
+  - id: F07
+    title: 机器人机构学
+    path: book/01-foundations/F07-mechanisms.md
+    status: review
+    prerequisites:
+    - F01
+    - F05
+    scope: 串并联、闭链、自由度、工作空间、构型、刚度
+  - id: F08
+    title: 驱动与传动基础
+    path: book/01-foundations/F08-actuators-transmissions.md
+    status: review
+    prerequisites:
+    - F07
+    scope: 电机、减速器、驱动器、传动效率、传感器布局
+- id: 02-modeling
+  title: 第二篇：机器人建模
+  chapters:
+  - id: M01
+    title: 机器人运动链与模型描述
+    path: book/02-modeling/M01-kinematic-chains.md
+    status: review
+    prerequisites:
+    - F07
+    - F05
+    scope: 连杆关节、结构描述、坐标系、URDF
+  - id: M02
+    title: 正运动学
+    path: book/02-modeling/M02-forward-kinematics.md
+    status: review
+    prerequisites:
+    - M01
+    - F06
+    scope: DH、修正DH、PoE、正向位姿计算
+  - id: M03
+    title: 微分运动学与雅可比矩阵
+    path: book/02-modeling/M03-differential-kinematics-jacobian.md
+    status: verified
+    prerequisites:
+    - M02
+    - F03
+    scope: 空间与本体雅可比、速度映射、加速度
+  - id: M04
+    title: 逆运动学与奇异性
+    path: book/02-modeling/M04-inverse-kinematics-singularity.md
+    status: review
+    prerequisites:
+    - M03
+    - F02
+    scope: 解析IK、数值IK、伪逆、阻尼最小二乘、灵巧性
+  - id: M05
+    title: 机器人静力学
+    path: book/02-modeling/M05-robot-statics.md
+    status: review
+    prerequisites:
+    - M03
+    - F06
+    scope: 静力平衡、虚功、力旋量、关节力矩传递
+  - id: M06
+    title: 刚体机器人动力学
+    path: book/02-modeling/M06-rigid-body-dynamics.md
+    status: review
+    prerequisites:
+    - M03
+    - F03
+    - F08
+    scope: 牛顿—欧拉、拉格朗日、RNEA、CRBA、ABA、凯恩法简介
+  - id: M07
+    title: 接触与约束动力学
+    path: book/02-modeling/M07-contact-constrained-dynamics.md
+    status: review
+    prerequisites:
+    - M05
+    - M06
+    scope: 摩擦锥、接触约束、碰撞、抓取静力
+  - id: M08
+    title: 机器人标定与参数辨识
+    path: book/02-modeling/M08-calibration-identification.md
+    status: review
+    prerequisites:
+    - M02
+    - M06
+    - F04
+    scope: 几何标定、动力学回归、激励、可辨识性、物理一致性
+  - id: M09
+    title: 扩展动力学模型
+    path: book/02-modeling/M09-extended-dynamics.md
+    status: review
+    prerequisites:
+    - M06
+    - M07
+    scope: 浮动基、欠驱动、柔性关节、连续体与柔体
+- id: 03-planning-control
+  title: 第三篇：机器人规划与控制
+  chapters:
+  - id: C01
+    title: 反馈控制与稳定性
+    path: book/03-planning-control/C01-feedback-stability.md
+    status: review
+    prerequisites:
+    - F03
+    - F02
+    scope: 误差动态、闭环、极点、频域、Lyapunov基础
+  - id: C02
+    title: 经典控制与状态反馈
+    path: book/03-planning-control/C02-classical-state-feedback.md
+    status: review
+    prerequisites:
+    - C01
+    scope: PID、状态反馈、LQR、观测器入门、离散控制
+  - id: C03
+    title: 非线性动力学控制
+    path: book/03-planning-control/C03-nonlinear-dynamics-control.md
+    status: review
+    prerequisites:
+    - M06
+    - C01
+    scope: 计算力矩、反馈线性化、重力补偿、稳定性
+  - id: C04
+    title: 任务空间控制
+    path: book/03-planning-control/C04-task-space-control.md
+    status: review
+    prerequisites:
+    - M03
+    - C03
+    scope: 操作空间动力学、冗余、零空间、任务空间控制
+  - id: C05
+    title: 力控制与柔顺控制
+    path: book/03-planning-control/C05-force-compliance-control.md
+    status: review
+    prerequisites:
+    - M05
+    - M06
+    - C04
+    scope: 力位混合、阻抗、导纳、接触稳定性、被动性
+  - id: C06
+    title: 鲁棒与自适应控制
+    path: book/03-planning-control/C06-robust-adaptive-control.md
+    status: review
+    prerequisites:
+    - C03
+    - C01
+    scope: 滑模、H∞、扰动观测、自适应律、Slotine–Li
+  - id: C07
+    title: 最优控制与MPC
+    path: book/03-planning-control/C07-optimal-control-mpc.md
+    status: review
+    prerequisites:
+    - C02
+    - F04
+    scope: PMP、动态规划、轨迹优化、MPC、约束和稳定性
+  - id: C08
+    title: 轨迹生成
+    path: book/03-planning-control/C08-trajectory-generation.md
+    status: review
+    prerequisites:
+    - M04
+    - F03
+    scope: 插值、样条、速度加速度与跃度限制、时间参数化
+  - id: C09
+    title: 运动规划
+    path: book/03-planning-control/C09-motion-planning.md
+    status: review
+    prerequisites:
+    - M04
+    - C08
+    scope: 构型空间、碰撞检测、图搜索、RRT、轨迹优化
+  - id: C10
+    title: 高层任务与协同规划
+    path: book/03-planning-control/C10-task-coordination-planning.md
+    status: review
+    prerequisites:
+    - C09
+    - M07
+    scope: 抓取装配规划、任务规划、协同规划
+  - id: C11
+    title: 迭代学习与复合控制
+    path: book/03-planning-control/C11-iterative-learning-composite.md
+    status: review
+    prerequisites:
+    - C02
+    - C06
+    scope: ILC、前馈修正、多层控制器与融合架构
+- id: 04-perception
+  title: 第四篇：机器人感知与状态估计
+  chapters:
+  - id: P01
+    title: 机器人传感器基础
+    path: book/04-perception/P01-sensors.md
+    status: review
+    prerequisites:
+    - F01
+    - F04
+    scope: 相机、激光雷达、IMU、编码器、力觉、触觉
+  - id: P02
+    title: 传感器模型与标定
+    path: book/04-perception/P02-sensor-model-calibration.md
+    status: review
+    prerequisites:
+    - P01
+    - F05
+    scope: 噪声、时间同步、相机标定、手眼标定
+  - id: P03
+    title: 状态估计理论
+    path: book/04-perception/P03-state-estimation.md
+    status: review
+    prerequisites:
+    - F04
+    - F03
+    scope: 贝叶斯滤波、KF、EKF、UKF、粒子滤波、因子图
+  - id: P04
+    title: 机器人视觉与三维感知
+    path: book/04-perception/P04-vision-3d-perception.md
+    status: review
+    prerequisites:
+    - P01
+    - F05
+    scope: 几何视觉、点云、深度、识别、位姿估计
+  - id: P05
+    title: 定位与SLAM
+    path: book/04-perception/P05-localization-slam.md
+    status: review
+    prerequisites:
+    - P03
+    - P04
+    scope: 视觉、激光、惯性里程计、回环和重定位
+  - id: P06
+    title: 地图与自主导航
+    path: book/04-perception/P06-mapping-navigation.md
+    status: review
+    prerequisites:
+    - P05
+    - C09
+    scope: 语义地图、代价地图、规划和导航
+  - id: P07
+    title: 多模态与主动感知
+    path: book/04-perception/P07-multimodal-active-perception.md
+    status: review
+    prerequisites:
+    - P02
+    - P03
+    - P04
+    scope: 融合、触觉-视觉、主动观测、感知不确定性
+- id: 05-robot-learning
+  title: 第五篇：机器人学习与具身智能
+  chapters:
+  - id: L01
+    title: 机器人机器学习基础
+    path: book/05-robot-learning/L01-robot-ml-basics.md
+    status: review
+    prerequisites:
+    - F04
+    scope: 监督、自监督、表示学习、数据与泛化
+  - id: L02
+    title: 模仿学习
+    path: book/05-robot-learning/L02-imitation-learning.md
+    status: review
+    prerequisites:
+    - L01
+    scope: 行为克隆、DAgger、离线示范、分布偏移
+  - id: L03
+    title: 强化学习
+    path: book/05-robot-learning/L03-reinforcement-learning.md
+    status: review
+    prerequisites:
+    - L01
+    - C01
+    scope: MDP、价值函数、策略梯度、Actor–Critic、模型式RL
+  - id: L04
+    title: 生成式机器人策略
+    path: book/05-robot-learning/L04-generative-policies.md
+    status: review
+    prerequisites:
+    - L02
+    scope: 扩散策略、动作序列、条件策略
+  - id: L05
+    title: 具身基础模型
+    path: book/05-robot-learning/L05-embodied-foundation-models.md
+    status: review
+    prerequisites:
+    - L04
+    - P04
+    scope: VLM、VLA、动作表征、任务与评测
+  - id: L06
+    title: 世界模型与学习系统
+    path: book/05-robot-learning/L06-world-models-learning-systems.md
+    status: review
+    prerequisites:
+    - L03
+    scope: 世界模型、Sim-to-Real、域随机化、安全评估
+- id: 06-systems
+  title: 第六篇：机器人系统与工程实践
+  chapters:
+  - id: E01
+    title: 嵌入式与实时控制
+    path: book/06-systems/E01-embedded-realtime-control.md
+    status: review
+    prerequisites:
+    - F08
+    - C01
+    scope: MCU、实时循环、CAN、EtherCAT、延迟与抖动
+  - id: E02
+    title: ROS2系统基础
+    path: book/06-systems/E02-ros2-fundamentals.md
+    status: review
+    prerequisites:
+    - M01
+    - E01
+    scope: 节点、话题、服务、Action、DDS、QoS、TF2、ros2_control
+  - id: E03
+    title: 机器人软件架构
+    path: book/06-systems/E03-robot-software-architecture.md
+    status: review
+    prerequisites:
+    - E02
+    - C09
+    scope: MoveIt2、Nav2、状态机、行为树、任务调度
+  - id: E04
+    title: 机器人仿真
+    path: book/06-systems/E04-robot-simulation.md
+    status: review
+    prerequisites:
+    - M06
+    - C01
+    scope: 物理引擎、数字孪生、仿真误差
+  - id: E05
+    title: 机器人功能安全
+    path: book/06-systems/E05-robot-safety.md
+    status: review
+    prerequisites:
+    - E01
+    - C01
+    scope: 急停、故障检测、限位、碰撞监测、降级
+  - id: E06
+    title: 机器人系统集成
+    path: book/06-systems/E06-robot-system-integration.md
+    status: review
+    prerequisites:
+    - E02
+    - E05
+    scope: 控制、感知、规划、导航、电控模块协作
+  - id: E07
+    title: 工程实验与可复现性
+    path: book/06-systems/E07-reproducible-engineering.md
+    status: review
+    prerequisites:
+    - F04
+    - E06
+    scope: 日志、指标、实验协议、复现与验证
+  - id: E08
+    title: 机器人应用专题
+    path: book/06-systems/E08-robot-applications.md
+    status: review
+    prerequisites:
+    - E06
+    scope: 工业、农业、人形、空中、水下、医疗、软体、群体机器人

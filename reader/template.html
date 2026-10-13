@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>现代机器人学 · 独立离线教材</title>
+<meta name="description" content="现代机器人学：建模、规划、感知、控制与智能 · 六篇 49 章 · 单文件离线教材">
+<style>
+/*INLINE_STYLE*/
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <header class="topbar">
+    <div class="brand-zone"><button id="sidebar-toggle" class="icon-button sidebar-toggle" aria-label="切换课程目录" title="课程目录">☰</button><div class="brand-emblem">M<span>R</span></div><div class="brand-text"><strong>现代机器人学</strong><span>MODERN ROBOTICS CURRICULUM</span></div></div>
+    <div class="topbar-actions"><button class="search-button" id="search-open" aria-label="搜索课程"><span class="search-lens">⌕</span> <span class="search-placeholder">搜索章节与知识点</span> <kbd>/</kbd></button><button id="theme-toggle" class="icon-button" title="切换深浅色" aria-label="切换深浅色">☾</button><a class="topbar-help" href="#/guide" title="如何使用">阅读指南</a></div>
+  </header>
+  <div class="body-grid">
+    <aside id="sidebar" class="sidebar" aria-label="课程导航"><div class="sidebar-scroll">
+      <div class="side-meta"><span class="side-eyebrow">THE CURRICULUM</span><span id="progress-counter">0 / 49 已完成</span></div>
+      <div class="progress-track"><span id="progress-fill"></span></div>
+      <nav class="side-shortcuts" aria-label="常用页面"><button data-target="guide" class="nav-button"><span>⌂</span> 课程导览</button><button data-target="notation" class="nav-button"><span>∑</span> 数学符号约定</button></nav>
+      <div id="chapters-nav"></div>
+      <p class="nav-footnote">完整课程目录 · 六篇共 49 章</p>
+    </div></aside>
+    <div id="drawer-backdrop" class="drawer-backdrop" hidden></div>
+    <main id="main" class="main-area" tabindex="-1"><div class="reading-wrap">
+       <div class="mobile-location" id="mobile-location">课程导览</div>
+       <div class="article-card"><div id="page-content" class="prose"></div></div>
+       <nav class="chapter-pager" aria-label="章节切换"><button id="prev" class="pager-btn" disabled><span class="pager-label">上一章</span><strong id="prev-title">—</strong></button><button id="next" class="pager-btn pager-next" disabled><span class="pager-label">下一章</span><strong id="next-title">—</strong></button></nav>
+       <footer class="main-footer">现代机器人学 · 个人学习整理 · 参考公开课程与教材</footer>
+    </div></main>
+    <aside class="toc-aside" aria-label="本页目录"><div class="toc-inner"><p class="toc-eyebrow">本页目录</p><nav id="page-toc"></nav><div class="toc-tip">提示：按 <kbd>/</kbd> 搜索本地教材</div></div></aside>
+  </div>
+</div>
+<dialog id="search-dialog" aria-label="搜索教材" class="search-dialog"><div class="search-dialog-inner"><div class="search-input-wrap"><span class="search-lens">⌕</span><input id="search-input" placeholder="输入章节、公式或关键字…" autocomplete="off" aria-label="搜索内容"><button id="search-close" class="search-close" aria-label="关闭搜索">Esc</button></div><p class="search-hint">搜索已编写正文与章节标题</p><div id="search-results" class="search-results"></div></div></dialog>
+<script id="book-payload" type="application/json">/*INLINE_DATA*/</script>
+<script>
+/*INLINE_SCRIPT*/
+</script>
+</body>
+</html>
