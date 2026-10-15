@@ -43,7 +43,18 @@ for pattern in (r'<script\b[^>]*\bsrc=', r'<link\b[^>]*\bhref=', r'<iframe\b', r
 match = re.search(r'<script id="book-payload" type="application/json">(.*?)</script>', html, re.S)
 assert match, 'Missing embedded book data'
 payload = json.loads(match.group(1))
-assert len(payload['pages']) == 50
+details = yaml.safe_load((ROOT / 'book/explanations/catalog.yml').read_text(encoding='utf-8'))['explanations']
+assert len(payload['pages']) == 50 + len(details)
+assert payload['explanations'] == details
+assert len({item['id'] for item in details}) == len(details)
+for item in details:
+    assert item['chapter'] in {c['id'] for c in chapters}
+    assert payload['pages'].get('explain:' + item['id'])
+    doc = payload['pages'][item['chapter']]['html']
+    assert '#/explain/' + item['id'] in doc
+    assert item['anchor'] in doc
+assert '部分教学详细讲解' in html
+assert 'data-target="explanations"' in html
 
 class ArticleScanner(HTMLParser):
     def __init__(self):

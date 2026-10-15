@@ -1,0 +1,18 @@
+<section class="rank-lab" data-rank-lab="redundancy" aria-label="三关节平面机械臂冗余运动交互演示">
+  <div class="rank-lab-heading"><strong>交互实验 03 · 末端不动，手肘改变</strong><span>平面 3R · 二维位置任务</span></div>
+  <p>改变关节 1 的角度，程序会重新计算其余两个关节，让机械臂始终抓住同一个二维目标点，虚线是前一个姿态的轮廓</p>
+  <svg data-planar-3r class="rank-plot rank-large-plot" viewBox="0 0 620 320" role="img" aria-label="三连杆在相同末端位置下的不同构型">
+    <g class="rank-3r-grid"></g>
+    <path data-3r-prev class="rank-arm-prev" d=""/>
+    <path data-3r-link1 class="rank-arm-link rank-link-a" d=""/>
+    <path data-3r-link2 class="rank-arm-link rank-link-b" d=""/>
+    <path data-3r-link3 class="rank-arm-link rank-link-c" d=""/>
+    <g data-3r-joints></g>
+    <circle data-3r-target class="rank-target-ring" r="13" cx="0" cy="0"/>
+    <text data-3r-target-label class="rank-svg-note">固定目标点</text>
+  </svg>
+  <div class="rank-controls"><label class="rank-control"><span>调整关节 1 <output data-red-out>0°</output></span><input data-red-input type="range" min="-60" max="60" step="1" value="0"/></label></div>
+  <div class="rank-stat-row"><div><small>末端 x</small><strong data-red-x>1.55 m</strong></div><div><small>末端 y</small><strong data-red-y>0.45 m</strong></div><div><small>末端朝向</small><strong data-red-angle>—</strong></div></div>
+  <p class="rank-state-note" data-red-message aria-live="polite">位置始终固定，内部构型在改变</p>
+  <div class="rank-presets"><button type="button" data-red-preset="-45">左侧构型</button><button type="button" data-red-preset="0">中间构型</button><button type="button" data-red-preset="45">右侧构型</button></div>
+</section>

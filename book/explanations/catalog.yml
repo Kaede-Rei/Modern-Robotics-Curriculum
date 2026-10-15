@@ -1,0 +1,9 @@
+# 详细讲解独立于六篇 49 章，id 为稳定的站内链接标识
+explanations:
+  - id: F02-core2-rank-nullspace
+    chapter: F02
+    section: 核心 2. 秩、零空间与几何约束
+    anchor: 核心-2.-秩零空间与几何约束
+    title: 秩、零空间与几何约束
+    path: book/explanations/F02-core2-rank-nullspace.md
+    status: ready

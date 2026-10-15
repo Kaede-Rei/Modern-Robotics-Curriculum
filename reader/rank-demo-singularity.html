@@ -1,0 +1,16 @@
+<section class="rank-lab" data-rank-lab="singularity" aria-label="平面二连杆奇异位形交互演示">
+  <div class="rank-lab-heading"><strong>交互实验 02 · 伸直时失去了什么</strong><span>平面 2R</span></div>
+  <p>拖动第二关节角度，观察两个关节速度在末端产生的方向，箭头表示雅可比的两列</p>
+  <svg data-planar-2r class="rank-plot rank-large-plot" viewBox="0 0 620 320" role="img" aria-label="二连杆机械臂、关节速度贡献与奇异速度方向">
+    <g class="rank-2r-grid"></g>
+    <path data-2r-link1 class="rank-arm-link rank-link-a" d=""/><path data-2r-link2 class="rank-arm-link rank-link-b" d=""/>
+    <g data-2r-joints></g>
+    <path data-2r-vector1 class="rank-vel-a" d=""/><path data-2r-vector2 class="rank-vel-b" d=""/>
+    <path data-2r-lost class="rank-vel-lost" d=""/>
+    <g class="rank-legend"><text x="16" y="25" class="rank-a-text">● 关节 1 的末端速度贡献</text><text x="16" y="45" class="rank-b-text">● 关节 2 的末端速度贡献</text><text x="16" y="65" class="rank-lost-text">● 奇异时无法独立生成的径向速度</text></g>
+  </svg>
+  <div class="rank-controls"><label class="rank-control"><span>第二关节角 q₂ <output data-sing-out>0°</output></span><input data-sing-input type="range" min="-90" max="90" step="1" value="0"/></label></div>
+  <div class="rank-stat-row"><div><small>雅可比秩</small><strong data-sing-rank>1</strong></div><div><small>零空间维数</small><strong data-sing-nullity>1</strong></div><div><small>det(J)</small><strong data-sing-det>0</strong></div></div>
+  <p class="rank-state-note" data-sing-message aria-live="polite"></p>
+  <div class="rank-presets"><button type="button" data-sing-preset="0">伸直（奇异）</button><button type="button" data-sing-preset="-45">弯曲 −45°</button><button type="button" data-sing-preset="45">弯曲 +45°</button></div>
+</section>

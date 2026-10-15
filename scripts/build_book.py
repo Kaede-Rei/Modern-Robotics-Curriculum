@@ -18,6 +18,7 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / 'book/catalog.yml'
 TEMPLATE = ROOT / 'reader/template.html'
 OUTPUT = ROOT / 'dist/index.html'
+DETAIL_CATALOG = ROOT / 'book/explanations/catalog.yml'
 LABS = json.loads((ROOT / 'reader/learning-labs.json').read_text(encoding='utf-8'))
 LAB_BY_ID = {lab['id'].upper(): lab for lab in LABS}
 
@@ -49,6 +50,17 @@ def convert_markdown(path: Path, *, chapter: str) -> dict:
     if result.stderr.strip():
         raise ValueError(f'Pandoc reported a conversion warning in {path}: {result.stderr.strip()[:900]}')
     html = result.stdout
+    if chapter == 'explain:F02-core2-rank-nullspace':
+        demos = {
+            'RANK_MOTORS': 'rank-demo-motors.html',
+            'RANK_SINGULARITY': 'rank-demo-singularity.html',
+            'RANK_REDUNDANCY': 'rank-demo-redundancy.html',
+        }
+        for name, fragment in demos.items():
+            marker = '<!-- INTERACTIVE:' + name + ' -->'
+            if html.count(marker) != 1:
+                raise ValueError('Missing or repeated F02 lesson marker: ' + marker)
+            html = html.replace(marker, (ROOT / 'reader' / fragment).read_text(encoding='utf-8'))
     if chapter == 'M03':
         token = '<!-- INTERACTIVE:ARM2R -->'
         if token not in html:
@@ -129,23 +141,49 @@ def build():
         if not p.is_file():
             raise FileNotFoundError(f'Published chapter missing: {p}')
         pages[c['id']] = convert_markdown(p, chapter=c['id'])
+    # Supplemental explanations are independent pages, not additional curriculum chapters
+    detail_specs = yaml.safe_load(DETAIL_CATALOG.read_text(encoding='utf-8'))['explanations']
+    known_ids = {item['id'] for item in detail_specs}
+    if len(known_ids) != len(detail_specs):
+        raise ValueError('Duplicate supplemental explanation ID')
+    chapter_by_id = {c['id']: c for c in chapters}
+    for item in detail_specs:
+        slug = item['id']
+        if not re.fullmatch(r'[A-Za-z][A-Za-z0-9-]*', slug):
+            raise ValueError('Invalid supplemental explanation ID: ' + slug)
+        chapter = item['chapter']
+        if chapter not in chapter_by_id:
+            raise ValueError('Unknown source chapter: ' + chapter)
+        origin = pages.get(chapter)
+        if not origin:
+            raise ValueError('Source chapter not published: ' + chapter)
+        source = BeautifulSoup(origin['html'], 'html.parser')
+        if not source.find(id=item['anchor']):
+            raise ValueError('Source section anchor does not exist: ' + str(item['anchor']))
+        destination = '#/explain/' + slug
+        if not any(a.get('href') == destination for a in source.find_all('a')):
+            raise ValueError('Source chapter missing detail link: ' + destination)
+        detail_file = (ROOT / item['path']).resolve()
+        if not detail_file.is_relative_to(ROOT) or not detail_file.is_file():
+            raise FileNotFoundError('Missing supplemental explanation: ' + item['path'])
+        pages['explain:' + slug] = convert_markdown(detail_file, chapter='explain:' + slug)
     payload = {
         'project': cat['project'], 'title': cat['title'],
-        'parts': cat['parts'], 'pages': pages,
+        'parts': cat['parts'], 'pages': pages, 'explanations': detail_specs,
     }
     raw_json = json.dumps(payload, ensure_ascii=False, separators=(',', ':'))
     # Escaping < prevents attacker-supplied prose from breaking out of JSON script tag.
     raw_json = raw_json.replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     template = TEMPLATE.read_text(encoding='utf-8')
-    style = (ROOT / 'reader/style.css').read_text(encoding='utf-8') + '\n' + (ROOT / 'reader/learning-labs.css').read_text(encoding='utf-8')
-    script = (ROOT / 'reader/learning-labs.js').read_text(encoding='utf-8') + '\n' + (ROOT / 'reader/reader.js').read_text(encoding='utf-8')
+    style = '\n'.join((ROOT / 'reader' / name).read_text(encoding='utf-8') for name in ('style.css', 'learning-labs.css', 'rank-lesson.css'))
+    script = '\n'.join((ROOT / 'reader' / name).read_text(encoding='utf-8') for name in ('learning-labs.js', 'rank-lesson.js', 'reader.js'))
     for marker in ('/*INLINE_STYLE*/', '/*INLINE_SCRIPT*/', '/*INLINE_DATA*/'):
         if template.count(marker) != 1:
             raise ValueError('Template marker missing or repeated: ' + marker)
     html = template.replace('/*INLINE_STYLE*/', style).replace('/*INLINE_SCRIPT*/', script).replace('/*INLINE_DATA*/', raw_json)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(html, encoding='utf-8')
-    n = len(pages)-1
+    n = len(chapters) - sum(c['status']=='planned' for c in chapters)
     print(f'BUILT {OUTPUT.relative_to(ROOT)} | {len(chapters)} catalog chapters | {n} published | {OUTPUT.stat().st_size:,} bytes | sha256={hashlib.sha256(OUTPUT.read_bytes()).hexdigest()}')
     return 0
 

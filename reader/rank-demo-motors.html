@@ -1,0 +1,29 @@
+<section class="rank-lab" data-rank-lab="motors" aria-label="两个电机输入与零空间交互演示">
+  <div class="rank-lab-heading"><strong>交互实验 01 · 输入抵消与零空间</strong><span>拖动滑块</span></div>
+  <p>左图显示小车的合成速度，右图显示输入向量在二维平面的位置，斜线就是全部抵消组合构成的零空间</p>
+  <div class="rank-diagrams rank-diagrams-double">
+    <svg class="rank-plot" viewBox="0 0 340 226" role="img" aria-label="小车随两个电机合成速度移动的示意图">
+      <g class="rank-grid"><path d="M20 153H320M170 34V181"/></g>
+      <path class="rank-track" d="M25 154H315"/>
+      <path class="rank-baseline" d="M170 46V184"/>
+      <g data-car><rect x="-30" y="-20" width="60" height="37" rx="9" class="rank-car"/><circle cx="-18" cy="21" r="7" class="rank-wheel"/><circle cx="18" cy="21" r="7" class="rank-wheel"/></g>
+      <path data-car-arrow class="rank-arrow" d=""/>
+      <text x="170" y="22" class="rank-svg-title">合成运动示意</text>
+      <text x="170" y="211" class="rank-svg-note">虚线为速度等于 0 时的基准</text>
+    </svg>
+    <svg class="rank-plot" viewBox="0 0 340 226" role="img" aria-label="速度输入平面和零空间直线">
+      <g class="rank-grid"><path d="M25 113H315M170 12V213"/></g>
+      <path d="M65 218L275 8" class="rank-null-line"/>
+      <path data-point-a class="rank-component-a" d=""/><path data-point-b class="rank-component-b" d=""/>
+      <circle data-input-point cx="170" cy="113" r="7" class="rank-input-dot"/>
+      <text x="310" y="130" class="rank-svg-axis">v₁</text><text x="180" y="17" class="rank-svg-axis">v₂</text>
+      <text x="240" y="43" class="rank-svg-note">v₁ + v₂ = 0</text>
+    </svg>
+  </div>
+  <div class="rank-controls">
+    <label class="rank-control"><span>电机 1 的速度 <output data-motor-out="v1">+2</output></span><input data-motor-input="v1" type="range" min="-3" max="3" step="1" value="2" /></label>
+    <label class="rank-control"><span>电机 2 的速度 <output data-motor-out="v2">−2</output></span><input data-motor-input="v2" type="range" min="-3" max="3" step="1" value="-2" /></label>
+  </div>
+  <div class="rank-lab-result"><div><small>合成速度 v₁ + v₂</small><strong data-motor-total>0</strong></div><p data-motor-message aria-live="polite"></p></div>
+  <div class="rank-presets"><button type="button" data-motor-preset="cancel">反向抵消</button><button type="button" data-motor-preset="add">同向运动</button><button type="button" data-motor-preset="stop">全部停止</button></div>
+</section>

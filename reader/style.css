@@ -17,3 +17,9 @@ html[data-theme=dark]{--bg:#101a1b;--surface:#172324;--ink:#e6efec;--muted:#a7b5
 .prose p.math-scroll math[display=block]{max-width:none}
 .prose .table-scroll{margin:20px 0}.prose .table-scroll table{margin:0}
 @media(max-width:760px){.prose p.math-scroll math[display=block]{font-size:1em}}
+
+/* Independent detail lessons preserve the existing navigation and article design */
+.chapter-pager[hidden]{display:none}
+.detail-back{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;margin:42px 0 12px;padding-top:18px;border-top:1px solid var(--border);font-size:13px}
+.detail-back a{display:inline-flex;align-items:center}
+@media(max-width:760px){.detail-back{gap:12px;flex-direction:column}.guide-row{flex-wrap:wrap}.guide-row button{max-width:100%;white-space:normal;text-align:left}}
