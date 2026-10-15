@@ -4,6 +4,7 @@
 
 **先修：** F02 矩阵、F03 微分；此处介绍的工具是 P 篇状态估计与第三篇最优控制的基础，不代替专门课程
 
+
 ## 核心 1. 随机变量与测量误差
 
 记真实量为 $\mathbf x$，测量为 $\mathbf z=\mathbf h(\mathbf x)+\mathbf v$，其中 $\mathbf v$ 是随机测量噪声；期望 $\mathbb E[\mathbf v]$ 描述平均偏差，协方差
@@ -21,6 +22,11 @@ $$
 $$
 
 因此噪声较大的观测应具有较小的信息权重（$\boldsymbol\Sigma^{-1}$）
+
+<figure class="concept-diagram web-source-figure" data-asset="gaussian">
+  <img src="../../assets/figures/web-png/gaussian.png" alt="二维高斯分布的样本、边缘密度与椭圆等高线" loading="lazy"/>
+  <figcaption>样本云的长方向对应较大的方差，倾斜椭圆反映两个分量相关；协方差逆矩阵让长轴方向的同等距离残差受到较小惩罚，等高线不是未经标定即可使用的置信边界 · 来源：<a href="https://commons.wikimedia.org/wiki/File:MultivariateNormal.png" target="_blank" rel="noopener noreferrer">Bscan</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></figcaption>
+</figure>
 
 ## 核心 2. 两次测量怎么融合
 
@@ -43,6 +49,11 @@ $$
 
 先验 $p(\mathbf x)$ 表示观测前的认知；似然 $p(\mathbf z\mid\mathbf x)$ 表示测量模型；后验 $p(\mathbf x\mid\mathbf z)$ 综合两者；定位、SLAM 和状态估计都可以在这一框架下理解，但实际求解通常需要近似
 
+<figure class="concept-diagram web-source-figure" data-asset="kalman">
+  <img src="../../assets/figures/web-png/kalman.png" alt="卡尔曼滤波状态与观测模型" loading="lazy"/>
+  <figcaption>沿状态到观测的箭头读测量模型，沿前一状态到后一状态的箭头读预测模型；过程噪声与测量噪声作用在不同位置，贝叶斯更新把预测和新观测结合起来 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Kalman_filter_model.png" target="_blank" rel="noopener noreferrer">Own work by Ciphergoth .</a> · <a href="https://commons.wikimedia.org/wiki/File:Kalman_filter_model.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
+
 ## 核心 4. 从最小二乘到加权最小二乘
 
 线性测量模型为 $\mathbf z=\mathbf H\mathbf x+\mathbf v$；在噪声高斯、协方差 $\boldsymbol\Sigma\succ0$ 条件下，极大似然对应加权最小二乘
@@ -58,6 +69,11 @@ $$
 $$
 
 这是一条数学表达式，**并不是推荐的软件实现**；实际数值计算应优先用 QR、Cholesky（条件允许时）或 SVD 解线性方程组
+
+<figure class="concept-diagram web-source-figure" data-asset="projection">
+  <img src="../../assets/figures/web-png/projection.png" alt="最小二乘的列空间投影与正交残差" loading="lazy"/>
+  <figcaption>普通最小二乘在欧氏空间做正交投影；加权最小二乘应先按噪声尺度白化，再解释投影，不能把原坐标中的垂直关系直接沿用到任意权重 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Least_squares_projection_geometry.png" target="_blank" rel="noopener noreferrer">Eteri byazrova (GraphMath)</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 进阶 5. 非线性优化和约束
 

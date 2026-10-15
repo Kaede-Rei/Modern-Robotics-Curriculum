@@ -4,6 +4,7 @@
 
 **先修：** M06、M08、C01、C03；**学习结构：** 扰动边界 → 鲁棒反馈 → 参数自适应 → 保证条件与实验局限
 
+
 ## 1. 先把未知的量分类
 
 假设真实机器人
@@ -71,6 +72,11 @@ $$
 扰动观测器（DOB）通常结合名义模型、可测运动和滤波估计等效输入扰动，随后作补偿；性能依赖观测带宽、延迟、测量噪声、未建模共振和名义逆模型；“估计外力”不能自动等价于有力传感器提供的接触真值
 
 $H_\infty$ 控制通过适当的广义对象、加权函数和稳定性条件，约束从外部扰动 $w$ 到性能输出 $z$ 的诱导增益，如 $\|T_{w\to z}\|_\infty<\gamma$；数值上求一个 $\gamma$ 并不表示所有非线性机器人行为都有相同增益界
+
+<figure class="concept-diagram web-source-figure" data-asset="pidresp">
+  <img src="../../assets/figures/web-png/pidresp.png" alt="含前馈与反馈通道的 PID 调节器结构图" loading="lazy"/>
+  <figcaption>这是带不同前馈和反馈通道的 PID 结构图，不是鲁棒性证明或误差响应曲线；可以借它定位模型补偿和误差反馈所在通道，再分析模型不确定性如何进入闭环 · 来源：<a href="https://commons.wikimedia.org/wiki/File:PID_regulator_for_non-step_inputs.png" target="_blank" rel="noopener noreferrer">Luca Ghio</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 5. 实践：有界扰动下的误差下界
 

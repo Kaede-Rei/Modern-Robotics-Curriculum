@@ -6,6 +6,7 @@
 
 ![手眼标定中必须核对每个坐标变换的方向](../../assets/figures/hand-eye-chain.svg)
 
+
 ## 1. 针孔相机、畸变与深度
 
 相机系点 $\mathbf p_c=[X,Y,Z]^T$ 在 $Z>0$ 时，理想针孔模型为
@@ -18,6 +19,11 @@ $$
 仅在 $s=0$ 且已消除镜头畸变时，反投影才可用 $X=(u-c_x)Z/f_x$、$Y=(v-c_y)Z/f_y$；真实镜头常用径向/切向畸变参数，深度图和彩色图还可能来自不同光心，必须进行外参对齐和适当重采样
 
 标定并不等于“得到一组看着合理的参数”：应该使用未参与优化的不同姿态/距离图像检查**重投影残差**和空间覆盖；仅看训练集 RMS 容易掩盖畸变模型失配
+
+<figure class="concept-diagram web-source-figure" data-asset="calib">
+  <img src="../../assets/figures/web-png/calib.png" alt="双目视觉视差与深度关系示意图" loading="lazy"/>
+  <figcaption>对比同一物体在两视图中的横向位置差；校正双目模型中视差越小，深度越大，同样的视差噪声会在远处造成更大的深度误差 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Visual_disparity_-_depth_from_2D.png" target="_blank" rel="noopener noreferrer">Sbitzer at English Wikipedia</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 2. 坐标系约定：把每一次变换写完整
 

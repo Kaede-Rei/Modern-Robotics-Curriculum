@@ -4,6 +4,7 @@
 
 **先修：** E01、C01、E03；**学习目标：**区分控制算法的稳定性、软件异常处理与经过风险评估的安全功能；明确紧急停止、保护停止和恢复的不同语义
 
+
 ## 核心｜1. 稳定、可靠和安全不是同一回事
 
 闭环稳定性证明研究指定模型及假设下的状态行为；软件可靠性关注故障发生概率与功能正确性；**功能安全**则关注故障发生时对人员和设备的风险控制；即使 Lyapunov 稳定，也可能稳定地施加危险接触力
@@ -15,6 +16,11 @@
 **正常停止**由任务逻辑请求结束动作；**保护停止**可能由防护条件、工作区入侵或其他保护措施触发；**紧急停止**面向突发危险的停止需求；它们的触发源、优先级、复位方式及所需硬件架构可能不同
 
 特别注意：急停不等于机械制动“立刻瞬间静止”，也不等于 ROS2 发布零速度；不同应用需要按风险分析确定停车方式、减速曲线、失电和垂直轴保持策略；STO 等驱动安全功能也有各自定义，不能将其与“制动力矩一定存在”混为一谈
+
+<figure class="concept-diagram web-source-figure" data-asset="estop">
+  <img src="../../assets/figures/web-png/estop.png" alt="急停开关的电气图形符号" loading="lazy"/>
+  <figcaption>这是急停开关的电气图形符号，虚线表示操作件与触点之间的机械关联；符号不展示完整的安全回路、锁存和复位逻辑，不能据此推断安全等级或自动恢复行为 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Arr%C3%AAt_d%27urgence.png" target="_blank" rel="noopener noreferrer">Zewan</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心｜3. 故障锁存与恢复许可
 

@@ -4,8 +4,6 @@
 
 **先修：** F03、F05；默认采用**角分量在前**的旋量顺序 $\mathbf V=[\boldsymbol\omega;\mathbf v]$
 
-![空间坐标与本体坐标的表达不同，物理运动不变](../../assets/figures/spatial-body-frames.svg)
-
 ## 核心 1. 旋转空间不是普通向量空间
 
 旋转矩阵组成李群 $SO(3)$，刚体位姿组成李群 $SE(3)$；它们有连续可微的局部结构，也能通过矩阵乘法组合，但一般不能用普通三维向量相加来完成有限旋转复合
@@ -20,6 +18,11 @@ $$
 $$
 
 此处 hat 运算 $[\cdot]$ 把向量变为矩阵，vee 运算 $(\cdot)^\vee$ 是它在对应李代数上的逆
+
+<figure class="concept-diagram web-source-figure" data-asset="qrot">
+  <img src="../../assets/figures/web-png/qrot.png" alt="四元数空间旋转示意图" loading="lazy"/>
+  <figcaption>四元数图帮助区分旋转的轴与角；单位四元数表示三维旋转，不能把四个参数当成四个独立转动自由度，也不能直接按普通向量加法复合姿态 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Quaternionic_rotation.png" target="_blank" rel="noopener noreferrer">HansVanLeunen</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心 2. 指数映射与 Rodrigues 公式
 
@@ -85,6 +88,11 @@ $$
 ## 进阶 6. 非交换性为何重要
 
 一般有 $e^{\mathbf A}e^{\mathbf B}\ne e^{\mathbf A+\mathbf B}$；对于非交换的刚体变换，旋转/平移更新的左右乘约定会决定扰动是在空间系还是本体系解释；求误差、线性化或迭代 IK 时需要与实现保持一致
+
+<figure class="concept-diagram web-source-figure" data-asset="rot">
+  <img src="../../assets/figures/web-png/rot.png" alt="标有 XYZ 坐标轴的彩色立方体" loading="lazy"/>
+  <figcaption>图中只有立方体与坐标轴，未画旋转序列；可自行想象先绕 X 轴转 90° 再绕 Y 轴转 90°，然后交换顺序比较彩色面的朝向，理解变换链的乘法为何通常不交换 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Rotation3D.png" target="_blank" rel="noopener noreferrer">The original uploader was Ske at French Wikipedia .</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 实践 7. 自己推导 2R 的 PoE
 

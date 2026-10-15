@@ -2,6 +2,9 @@
 """Verify the curriculum, its embedded resources, and the offline reader"""
 from __future__ import annotations
 import hashlib
+import base64
+from bs4 import BeautifulSoup
+from image_assets import read_png, validate_png
 from html.parser import HTMLParser
 import json
 import re
@@ -34,6 +37,19 @@ for file in source_files:
     assert '。' not in source, f'Chinese full stop in {file}'
     assert not re.search(r'\bP[1-7]\s+(?:实验|工程|阶段|的)', source), f'phase metadata in {file}'
 
+manifest = json.loads((ROOT / 'assets/figures/web-png-sources.json').read_text(encoding='utf-8'))
+assets = manifest['assets']
+for key, asset in assets.items():
+    image = (ROOT / asset['local']).resolve()
+    assert image.is_relative_to(ROOT), key
+    assert all(asset.get(field) for field in ('sha256', 'bytes', 'width', 'height', 'author', 'license', 'license_url', 'download_url')), key
+    assert '参见' not in asset['license'], key
+    read_png(image, asset)
+for file in source_files:
+    source = file.read_text(encoding='utf-8')
+    for img in BeautifulSoup(source, 'html.parser').find_all('img'):
+        assert not img.get('src', '').startswith(('http:', 'https:', '//')), f'Online image in {file}'
+    assert not re.search(r'!\[[^\]]*\]\(https?://', source), f'Online Markdown image in {file}'
 html_path = ROOT / 'dist/index.html'
 html = html_path.read_text(encoding='utf-8')
 assert '。' not in html
@@ -69,7 +85,11 @@ class ArticleScanner(HTMLParser):
         if tag == 'math': self.math += 1
         if tag == 'img':
             self.images += 1
-            assert (attrs.get('src') or '').startswith('data:image/'), attrs.get('src')
+            src = attrs.get('src') or ''
+            assert src.startswith('data:image/'), f'Non-embedded image: {src[:120]}'
+            assert attrs.get('alt'), 'Image missing alternative text'
+            if src.startswith('data:image/png;base64,'):
+                validate_png(base64.b64decode(src.split(',', 1)[1], validate=True))
         if tag == 'a':
             u = attrs.get('href', '')
             assert u.startswith(('https://','http://','#','mailto:')), u
@@ -90,11 +110,24 @@ for chapter in chapters:
         all_labs[lab] = chapter['id']
 assert all_labs == {x['id']:x['chapter'] for x in lab_specs}, all_labs
 math_total += payload['pages']['notation']['html'].count('<math')
-assert images_total >= 31, images_total
+assert images_total >= 49, images_total
+for page_id, page in payload['pages'].items():
+    scan = ArticleScanner()
+    scan.feed(page['html'])
+    if page_id != 'notation':
+        assert scan.images > 0, f'Unillustrated page: {page_id}'
+# CSS can reference inlined images or internal SVG fragments, never network resources
+assert not re.search(r'url\([\s\"\']*(?:https?:|//)', html, re.I)
+assert 'data-image-source=\"remote\"' not in html
+assert not re.search(r'\b(?:srcset|poster)\s*=', html, re.I)
 report = {
     'chapters':len(chapters), 'parts':len(parts),
     'interactive_labs':len(all_labs), 'bibliography_entries':len(bib_ids),
-    'mathml_elements':math_total,'embedded_images':images_total,
+    'mathml_elements':sum(page['html'].count('<math') for page in payload['pages'].values()),
+    'chapter_images':images_total,
+    'embedded_images':sum(len(BeautifulSoup(page['html'], 'html.parser').find_all('img')) for page in payload['pages'].values()),
+    'offline_png_assets':len(assets),
+    'remote_png_references':sum(page['html'].count('data-image-source="remote"') for page in payload['pages'].values()),
     'html_bytes':html_path.stat().st_size,
     'html_sha256':hashlib.sha256(html_path.read_bytes()).hexdigest()
 }

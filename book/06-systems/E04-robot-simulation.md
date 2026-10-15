@@ -4,6 +4,7 @@
 
 **先修：** M06、M07、C01、L06；**学习目标：**理解数值积分、约束求解、传感器仿真和 Sim-to-Real 差异，建立仿真验证的证据边界
 
+
 ## 核心｜1. 仿真到底模拟了什么
 
 物理仿真器在离散步长 $h$ 下近似推进状态
@@ -15,6 +16,11 @@ $$
 其中 $\theta$ 代表惯量、关节阻尼、接触摩擦、执行器模型等；此处的 $\Phi_h$ 依赖数值积分和约束求解器；并不等于连续时间真实系统的精确映射
 
 必须区分四种不同的“逼真”：**几何外观、刚体动力学、接触/摩擦、传感器/通信**；图片逼真不能证明接触力可信
+
+<figure class="concept-diagram web-source-figure" data-asset="webots">
+  <img src="../../assets/figures/web-png/webots.png" alt="Webots 中的机器人仿真场景" loading="lazy"/>
+  <figcaption>这是 Webots 中的机器人仿真画面；可视外形、碰撞形状和动力学参数是不同层，画面看起来合理不代表接触力或传感器误差已被验证 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Simulation_of_a_Robotis_DARwIn-OP_in_Webots.png" target="_blank" rel="noopener noreferrer">Fabien Rohrer</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 核心｜2. URDF、SDF 与仿真模型
 

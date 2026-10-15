@@ -4,6 +4,7 @@
 
 **先修：** F02–F04、P01；**学习目标：**区分监督、自监督与策略学习；看懂数据、目标函数、泛化指标及部署分布之间的关系
 
+
 ## 核心｜1. 先定义任务，再选择网络
 
 机器人学习不是“给图片接一个神经网络”；一个标准样本至少须定义观测 $o_t$（例如图像与关节状态）、期望动作 $a_t$（关节目标/速度/力矩，含单位、坐标系与采样周期）和任务条件 $g$；学习策略可写为
@@ -41,6 +42,11 @@ $$
 $$
 
 这里的正负样本构造决定了模型学会何种不变性；若把可影响抓取姿态的物体方向当作应忽略的变化，好的对比损失也可能损害控制
+
+<figure class="concept-diagram web-source-figure" data-asset="cnn">
+  <img src="../../assets/figures/web-png/cnn.png" alt="卷积和池化层操作示意图" loading="lazy"/>
+  <figcaption>从图像到特征图的卷积与池化逐步改变空间分辨率和表征；这些特征仍需接到明确的预测或控制任务，网络结构本身不保证机器人泛化 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Convolutional_Network.png" target="_blank" rel="noopener noreferrer">Will Whitney</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 进阶｜4. 泛化与分布偏移不是同一件事
 

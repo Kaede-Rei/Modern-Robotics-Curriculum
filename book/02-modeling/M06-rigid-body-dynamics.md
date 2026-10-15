@@ -6,6 +6,7 @@
 
 **路线：** 核心（能量与 2R 完整推导）→ 进阶（空间刚体动力学、递归算法、结构性质）→ 实践（正逆动力学与能量验证）
 
+
 ## 1. 从一根杆开始：惯量不是“质量的另一个名字”
 
 将杆握在接近端部与接近质心的位置，感受到的转动难易程度不同；这不仅取决于质量，还取决于质量相对转轴的分布；刚体绕固定轴的转动惯量单位为 $\mathrm{kg\,m^2}$
@@ -23,6 +24,16 @@ $$
 $$
 
 这里 $\mathbf M(\mathbf q)\in\mathbb R^{n\times n}$ 为关节空间质量/惯性矩阵，不是所有连杆惯性张量简单求和，也不是机械臂所有关节的“质量表”；在独立广义坐标且刚体具有正质量和有效惯量的通常条件下，$\mathbf M$ 对称正定
+
+<figure class="concept-diagram web-source-figure" data-asset="robot3d">
+  <img src="../../assets/figures/web-png/robot3d.png" alt="工业机械臂三维模型渲染图" loading="lazy"/>
+  <figcaption>这是机械臂三维模型渲染图，不是实物照片；几何外形帮助定位连杆，但计算惯性矩阵还需要质量、质心和惯性张量，外观相同不代表动力学相同 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robot_arm_model_1.png" target="_blank" rel="noopener noreferrer">NeD80</a> · <a href="https://commons.wikimedia.org/wiki/File:Robot_arm_model_1.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
+
+<figure class="concept-diagram web-source-figure" data-asset="lever">
+  <img src="../../assets/figures/web-png/lever.png" alt="力臂与垂直作用力产生力矩的示意图" loading="lazy"/>
+  <figcaption>同样的力在离转轴更远的位置产生更大的力矩；但角加速度还取决于转动惯量，力矩的力臂效应和质量分布造成的惯量变化应分开分析 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Work_on_lever_arm.png" target="_blank" rel="noopener noreferrer">SamL 199917</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 2. 核心：拉格朗日动力学公式
 

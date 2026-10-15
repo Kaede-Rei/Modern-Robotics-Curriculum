@@ -4,6 +4,7 @@
 
 **先修：** C01；**核心：** PID、状态反馈；**进阶：** 可控性、LQR 与观测器；**实践：** 控制饱和和积分抗饱和检查
 
+
 ## 1. PID 是误差反馈，不是万能模型
 
 全书采用 $e=r-y$；连续 PID 写为
@@ -28,6 +29,11 @@ $$
 $$
 
 $K_{aw}>0$ 的大小需要与积分、饱和和控制周期共同整定；这不是在任何系统上都能自动保证稳定的“插入式补丁”
+
+<figure class="concept-diagram web-source-figure" data-asset="pid">
+  <img src="../../assets/figures/web-png/pid.png" alt="PID 控制基本原理示意图" loading="lazy"/>
+  <figcaption>误差同时进入比例、积分和微分三条支路，输出相加得到控制量；积分累计过去误差，微分反映变化趋势，实际实现还需处理饱和与测量噪声 · 来源：<a href="https://commons.wikimedia.org/wiki/File:PID.png" target="_blank" rel="noopener noreferrer">Robo Blazek, Pezinok</a> · <a href="https://commons.wikimedia.org/wiki/File:PID.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
 
 ## 2. 线性系统的状态反馈
 

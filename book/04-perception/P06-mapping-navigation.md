@@ -4,6 +4,7 @@
 
 **先修：** P03、P05、C09、F07；**目标：**区分多类地图，理解占据概率更新、膨胀和规划闭环，不把二维网格导航结论推广到所有机器人
 
+
 ## 1. 地图表达因任务而异
 
 | 地图 | 通常保存的内容 | 适用场景与代价 |
@@ -47,6 +48,11 @@ $$
 - 任务/行为树负责恢复、重规划、目标切换，但不能弥补定位失效或错误的碰撞足迹
 
 在 ROS2 Nav2 中，代价地图层、Planner、Controller 和行为树等以插件方式组合；**这是系统架构参考，不是必须使用某一种插件才能称为自主导航**
+
+<figure class="concept-diagram web-source-figure" data-asset="robotpath">
+  <img src="../../assets/figures/web-png/robotpath.png" alt="机器人运动路径与规划示意图" loading="lazy"/>
+  <figcaption>将路径叠在环境里只是导航的一层输出；完整闭环还需要定位、地图更新和局部避障，障碍或定位变化后原路径可能需要重新规划 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robot_Path.PNG" target="_blank" rel="noopener noreferrer">Hmaarya</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 5. 评价导航效果
 

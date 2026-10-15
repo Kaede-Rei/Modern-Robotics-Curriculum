@@ -4,11 +4,17 @@
 
 **先修：** F01、F05；本文主要关注理想刚性机构的运动结构，不替代强度校核与机械设计
 
+
 ## 核心 1. 连杆、关节、运动副
 
 连杆视作刚体，关节允许相邻刚体间某些相对运动；常见运动副包括旋转副 R、移动副 P、球副 S、柱面副 C 等；一个三维自由刚体有 6 个局部构型自由度，平面自由刚体有 3 个
 
 开链 $n$ 个独立 1-DOF 关节、固定基座通常具有 $n$ 个局部构型自由度；若存在闭链、齿轮或其他耦合约束，则不能直接按关节数计算
+
+<figure class="concept-diagram web-source-figure" data-asset="chain">
+  <img src="../../assets/figures/web-png/chain.png" alt="由四根杆和四个铰点组成的闭合运动链" loading="lazy"/>
+  <figcaption>沿运动链逐段识别刚体和运动副，再列出允许的相对运动与独立关节变量；机构自由度取决于连接与约束，不能只数连杆数量 · 来源：<a href="https://commons.wikimedia.org/wiki/File:KGG_01_Kinematische_Kette.png" target="_blank" rel="noopener noreferrer">Manfred Morgner ( ka-em-zwei-ein )</a> · <a href="https://commons.wikimedia.org/wiki/File:KGG_01_Kinematische_Kette.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
 
 ## 核心 2. 自由度计数：公式与边界
 
@@ -23,6 +29,11 @@ $N$ 包含机架在内的连杆数量，$J$ 为运动副数，$f_i$ 是各运动
 对四杆平面机构，$N=4,J=4$，四个旋转副各 $f_i=1$，得到 $M=3(4-1-4)+4=1$
 
 **适用限制：** 这些计数假设约束独立，且机构不存在特殊几何关系导致的多余约束、奇异位形或自运动；要获得真实局部自由度，应检查约束雅可比秩，而不是把公式结果当成所有构型都有效的保证
+
+<figure class="concept-diagram web-source-figure" data-asset="dof">
+  <img src="../../assets/figures/web-png/dof.png" alt="刚体平移与旋转自由度示意图" loading="lazy"/>
+  <figcaption>自由刚体有三个平移与三个转动自由度；运动副通过约束减少相对运动，闭链或特殊几何中的冗余约束会使简单自由度计数失效 · 来源：<a href="https://commons.wikimedia.org/wiki/File:DOF_Degrees_of_freedom_(mechanics).png" target="_blank" rel="noopener noreferrer">LaurensvanLieshout</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 核心 3. 工作空间和奇异性
 

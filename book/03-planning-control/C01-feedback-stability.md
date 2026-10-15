@@ -6,11 +6,17 @@
 
 ![反馈控制不仅包含控制律，也受传感器、执行机构与延迟影响](../../assets/figures/closed-loop-architecture.svg)
 
+
 ## 1. 先看物理闭环
 
 设 $r(t)$ 为期望关节角，$y(t)$ 为实际关节角，测得 $y_m=y+n$；采用全书约定 $e=r-y_m$，控制器根据误差产生输入 $u$，执行器与机械系统把 $u$ 变成运动，传感器再将运动送回控制器
 
 **开环**只按照预测施加输入，模型误差、负载变化和摩擦可能积累位置偏差；**闭环**用测量误差实时修正，但传感器噪声和延迟也会进入闭环；*反馈不是“永远更稳定”*，设计不当会使系统失稳
+
+<figure class="concept-diagram web-source-figure" data-asset="feedback">
+  <img src="../../assets/figures/web-png/feedback.png" alt="开环、前馈、反馈控制结构对比" loading="lazy"/>
+  <figcaption>沿参考输入、对象输出和返回通道读闭环；反馈通道必须带回实际测量，前馈通道依据目标或模型预先计算动作，两者承担的作用不同 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Control_Systems.png" target="_blank" rel="noopener noreferrer">Abmcdonald ( talk ) ( Uploads )</a> · <a href="https://creativecommons.org/licenses/by/3.0" target="_blank" rel="noopener noreferrer">CC BY 3.0</a></figcaption>
+</figure>
 
 ## 2. 核心：一阶与二阶误差动力学
 

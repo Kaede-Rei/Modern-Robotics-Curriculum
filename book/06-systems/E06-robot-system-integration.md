@@ -6,6 +6,7 @@
 
 ![系统任务、感知、规划、执行与反馈的关系示意](../../assets/figures/system-integration-loop.svg)
 
+
 ## 核心｜1. 系统集成的最小必要信息
 
 机器人动作通常经过“观测 → 状态估计 → 决策 → 规划 → 执行 → 结果确认”，任何一处假设不一致都可能导致整体失败
@@ -24,6 +25,11 @@
 | 故障契约 | 错误码、锁存、恢复与责任模块 | 上层取消不能绕开硬件级安全状态 |
 
 建议给每项自动化任务设置唯一关联 ID，贯穿感知、规划和执行日志，用于追溯单次任务跨节点的状态，见 E07
+
+<figure class="concept-diagram web-source-figure" data-asset="kuka">
+  <img src="../../assets/figures/web-png/kuka.png" alt="工业机械臂与视觉检测装备实物照片" loading="lazy"/>
+  <figcaption>机械臂、视觉与工作站连接后，要检查位姿单位、时间基准和执行反馈；系统能通信并不意味着目标坐标、命令时刻与实际动作已经一致 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robot_industrial_Kuka_Movicontrol.png" target="_blank" rel="noopener noreferrer">Movicontrol</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心｜3. 数据新鲜度比处理速度更重要
 

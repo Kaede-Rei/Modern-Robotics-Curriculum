@@ -4,6 +4,7 @@
 
 **先修：** P01、P02、F05；**目标：**理解投影几何、深度、特征、三维点云与刚体配准，能够区分感知输出的**位置**、**姿态**和**语义**
 
+
 ## 1. 图像形成与尺度歧义
 
 对于无畸变的针孔相机，$\mathbf p_c=(X,Y,Z)^T$ 且 $Z>0$，若 $s=0$，则
@@ -19,6 +20,11 @@ $$\boxed{X=(u-c_x)Z/f_x,\qquad Y=(v-c_y)Z/f_y}$$
 **单目尺度歧义：** 把目标与相机平移同时按同一比例缩放，投影可保持不变，因此没有额外尺度线索时，纯单目两视图几何不能恢复真实米制尺度
 
 双目整列后，在理想平行光轴、无畸变情况下，有 $Z=fB/d$，$B$ 是基线，$d$ 是像素视差；视差趋近零时深度不稳定；大基线虽能增强深度精度，也可能增大遮挡与匹配难度
+
+<figure class="concept-diagram web-source-figure" data-asset="calib">
+  <img src="../../assets/figures/web-png/calib.png" alt="双目视觉视差与深度关系示意图" loading="lazy"/>
+  <figcaption>同一物体在左右视图中的位置差提供深度线索；对于校正双目，深度与视差成反比，因此远距离的小视差对像素误差更敏感 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Visual_disparity_-_depth_from_2D.png" target="_blank" rel="noopener noreferrer">Sbitzer at English Wikipedia</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 2. 图像几何、位姿估计与重投影残差
 
@@ -58,6 +64,11 @@ $$
 $$
 
 行列式修正确保 $\mathbf R\in SO(3)$ 而非镜面反射；**这里假设对应已经正确**；ICP 将对应搜索与位姿优化交替进行，易受初值、局部极小值及退化场景影响
+
+<figure class="concept-diagram web-source-figure" data-asset="lidarcloud">
+  <img src="../../assets/figures/web-png/lidarcloud.png" alt="Ouster 激光雷达采集并配准的真实街道点云" loading="lazy"/>
+  <figcaption>这是车载 Ouster 激光雷达采集后配准到共同坐标系的街道点云；单帧原始点位于传感器坐标系，拼接前需估计运动，图中颜色编码回波强度与距离的组合，不代表语义类别 · 来源：<a href="https://commons.wikimedia.org/wiki/File%3AOuster_OS1-64_lidar_point_cloud_of_intersection_of_Folsom_and_Dore_St%2C_San_Francisco.png" target="_blank" rel="noopener noreferrer">Daniel L. Lu</a> · <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></figcaption>
+</figure>
 
 ## 5. 三维感知不能仅看检测准确率
 

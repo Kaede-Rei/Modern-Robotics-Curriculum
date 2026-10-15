@@ -4,6 +4,7 @@
 
 **先修：** M03 速度雅可比、M05 静力学、M06 刚体动力学；**本章重点：** 刚性约束、单边接触与最小的冲量模型；软组织接触、有限元或复杂求解器属于进阶专题
 
+
 ## 1. 从空中运动到碰到桌子
 
 没有接触时，电机力矩和重力决定关节加速度；碰到桌面后，桌面会产生反作用力，阻止末端穿透；接触过程至少涉及三种不同的量
@@ -13,6 +14,11 @@
 - **碰撞冲量（impulse）**：极短时间内速度突变所对应的冲量，单位 N·s
 
 将力、冲量和位置约束全部写成一种“接触力矩”会掩盖物理层级差异；下面先讨论约束已经成立且接触持续的情况，再讨论碰撞事件
+
+<figure class="concept-diagram web-source-figure" data-asset="rov">
+  <img src="../../assets/figures/web-png/rov.png" alt="水下机器人机械臂真实照片" loading="lazy"/>
+  <figcaption>夹爪接触物体后，允许的运动方向会受到接触面限制；照片只展示应用对象，法向、摩擦锥和约束雅可比仍需按实际接触几何建立 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_ROV_Manipulator_Arm.png" target="_blank" rel="noopener noreferrer">BPLINFO</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 2. 核心：双边约束的微分与动力学
 

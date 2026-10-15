@@ -6,8 +6,6 @@
 
 **学习路线：** 核心（自由体图、虚功与重力平衡）→ 进阶（六维 wrench 与约束反力）→ 实践（二维二连杆力矩核验）
 
-![同一外力在不同参考点对应不同力矩分量](../../assets/figures/wrench-lever-arm.svg)
-
 ## 1. 先画自由体图：谁在向谁施力
 
 想象一条机械臂停在空中，末端压住一块海绵
@@ -59,6 +57,11 @@ $$
 
 推广到平移关节时，同一广义力向量可能混合 N·m 与 N；不要笼统称全部分量为“力矩”
 
+<figure class="concept-diagram web-source-figure" data-asset="lever">
+  <img src="../../assets/figures/web-png/lever.png" alt="力臂与垂直作用力产生力矩的示意图" loading="lazy"/>
+  <figcaption>力矩大小由力与转轴到作用点向量的叉积决定；图中切向力与杆垂直，力矩大小等于杆长乘力，若改为沿杆方向施力则力矩为零 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Work_on_lever_arm.png" target="_blank" rel="noopener noreferrer">SamL 199917</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
+
 ## 3. 一张力的自由体图如何转成算法
 
 仍采用 M03 中的水平平面 2R，长度 $L_1,L_2$，关节角度 $q_1,q_2$；末端位置雅可比为
@@ -89,6 +92,11 @@ $$
 $$
 
 接触点在不同连杆时必须分别计算雅可比；不能把所有外力强行放到工具尖端的雅可比上
+
+<figure class="concept-diagram web-source-figure" data-asset="scheme">
+  <img src="../../assets/figures/web-png/scheme.png" alt="机器人机械臂简化机构图" loading="lazy"/>
+  <figcaption>沿两根连杆读出长度和关节角，再确定末端受力点的位置；将同一坐标系的外力代入雅可比转置，关节力矩的正负要按约定的正转向判断 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_Arm_schemat.png" target="_blank" rel="noopener noreferrer">Arczi325</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 4. 核心：重力补偿来自势能梯度
 

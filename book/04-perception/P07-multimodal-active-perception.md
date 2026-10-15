@@ -4,6 +4,7 @@
 
 **先修：** P02～P04、C10；**目标：**理解协方差融合、相关误差、触觉-视觉补充及主动感知的任务价值与安全边界
 
+
 ## 1. 为什么增加传感器不一定提高精度
 
 如果两个**条件独立且无偏**的标量高斯观测为 $z_1\sim\mathcal N(x,\sigma_1^2)$、$z_2\sim\mathcal N(x,\sigma_2^2)$，采用平坦先验的精度加权估计为
@@ -27,6 +28,11 @@ $$
 | LiDAR | 结构距离与环境形状 | 细粒度语义、透明细杆和近距离盲区 |
 
 视觉定位可以提供候选接触位置，触觉确认接触可以修正局部几何；但**力觉测到的反作用不等于直接知道物体的三维位姿**，仍需接触几何与运动约束
+
+<figure class="concept-diagram web-source-figure" data-asset="semantic">
+  <img src="../../assets/figures/web-png/semantic.png" alt="真实图像的语义分割标签掩膜" loading="lazy"/>
+  <figcaption>颜色区域表示语义标签，不能直接提供深度或接触状态；几何传感器补空间位置，触觉补接触信息，融合前必须确认坐标系与时间对应 · 来源：<a href="https://commons.wikimedia.org/wiki/File:EmiMa-099-semantic-segmentation.png" target="_blank" rel="noopener noreferrer">MartinThoma</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></figcaption>
+</figure>
 
 ## 3. 从被动测量到主动观测
 

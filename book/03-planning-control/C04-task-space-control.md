@@ -4,9 +4,15 @@
 
 **先修：** M03、M04、M06、C03；**路线：** 雅可比速度控制 → 冗余零空间 → 操作空间动力学
 
+
 ## 1. 先确定你控制的“任务”是什么
 
 任务空间可以是末端点位置 $\mathbf p\in\mathbb R^3$、完整 6D 位姿，或更复杂的抓取/视觉误差；写出 $\mathbf x=f(\mathbf q)$ 及其导数 $\dot{\mathbf x}=\mathbf J_x(\mathbf q)\dot{\mathbf q}$ 前，必须说明 $\mathbf x$ 的坐标系、单位和姿态误差定义；**不要把角度三个数直接当成全局可微的欧氏空间位置变量**
+
+<figure class="concept-diagram web-source-figure" data-asset="6dof">
+  <img src="../../assets/figures/web-png/6dof.png" alt="六自由度机械臂关节轴示意图" loading="lazy"/>
+  <figcaption>关节轴描述可施加的输入方向，工具任务描述期望的输出方向；选定位置、姿态或接触方向后，才知道任务雅可比应保留哪些行 · 来源：<a href="https://commons.wikimedia.org/wiki/File:6_Degree-of-Freedom_Robot_Diagram.png" target="_blank" rel="noopener noreferrer">Israel adilman</a> · <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></figcaption>
+</figure>
 
 ## 2. 核心：速度层的任务空间控制
 

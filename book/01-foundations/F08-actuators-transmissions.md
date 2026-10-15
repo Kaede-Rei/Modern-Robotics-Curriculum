@@ -4,6 +4,7 @@
 
 **先修：** F07；本文给出选择与建模所需的基础物理量，不代替具体器件的数据手册与安全评估
 
+
 ## 核心 1. 电机与关节是不同的物理对象
 
 对常见永磁直流电机的简化模型，在规定的符号与单位下有
@@ -14,6 +15,11 @@ V=L\dot i+Ri+e_b
 $$
 
 $K_t$ 为转矩常数，$K_e$ 为反电动势常数；简化模型未包含温升、饱和、齿槽转矩和驱动器策略；实际伺服驱动的内环可能是电流/力矩、速度或位置模式，其可实现的外层控制律不同
+
+<figure class="concept-diagram web-source-figure" data-asset="kuka">
+  <img src="../../assets/figures/web-png/kuka.png" alt="工业机械臂与视觉检测装备实物照片" loading="lazy"/>
+  <figcaption>从工业机械臂的关节外壳识别传动链所在位置；照片能说明驱动器集成在机构中，但看不到内部减速比、效率和转子惯量，计算这些量仍需参数表 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robot_industrial_Kuka_Movicontrol.png" target="_blank" rel="noopener noreferrer">Movicontrol</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心 2. 减速比与效率
 

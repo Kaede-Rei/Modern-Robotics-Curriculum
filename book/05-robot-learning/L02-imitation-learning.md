@@ -4,11 +4,17 @@
 
 **先修：** L01、C01；**学习目标：**能够写出 BC 与 DAgger 的目标，解释闭环分布偏移，并设计示范数据采集与验证方案
 
+
 ## 核心｜1. 示范是什么
 
 一条示范轨迹为 $\tau=(o_0,a_0,o_1,a_1,\ldots)$；通常还需记录时间戳、动作约定、相机标定、末端坐标系、任务指令、完成/失败标签；观察到的动作可能是专家的**控制指令**而非传感器测出的实际位移，两者不可混作标签
 
 模仿学习希望从专家 $\pi_E$ 学到 $\pi_\theta$；其特点是利用示范信息，而不必对每次真实机器人尝试都定义可计算奖励；但这并不意味着不需要部署安全与闭环评估
+
+<figure class="concept-diagram web-source-figure" data-asset="dobot">
+  <img src="../../assets/figures/web-png/dobot.png" alt="Dobot 机械臂在桌面作业中的实物照片" loading="lazy"/>
+  <figcaption>实物操作展示了示范采集的对象；训练样本还应配对记录观测、动作和时间戳，一张成功抓取照片不能代替连续的状态动作轨迹 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Dobot-_A_Robot_arm.png" target="_blank" rel="noopener noreferrer">DangerAlpha</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></figcaption>
+</figure>
 
 ## 核心｜2. 行为克隆（BC）
 

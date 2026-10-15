@@ -4,6 +4,7 @@
 
 **先修：** C09、M07、C05；**学习路径：** 任务动作 → 操作规划 → 移动操作/多机器人协调 → 可执行性与失败恢复
 
+
 ## 1. 三种“规划”不要混在一起
 
 - **运动规划**：给已指定的起点、终点与几何约束寻找无碰撞路径（C09）
@@ -23,6 +24,11 @@
 如果先决定一系列任务，再调用运动规划器，可能发现每一步都可达却整条任务不可行；例如先移动果篮会封闭机械臂通道，或抓取后新负载导致路径不再满足扭矩约束
 
 任务与运动联合规划（Task and Motion Planning, TAMP）通过离散动作候选与连续参数（抓取位姿、基座位姿、路径）之间的往返检查来解决该问题，计算成本高且通常没有“所有任务都能实时求最优解”的保证
+
+<figure class="concept-diagram web-source-figure" data-asset="plancrop">
+  <img src="../../assets/figures/web-png/plancrop.png" alt="机械手从抓取积木到堆叠目标的状态示意" loading="lazy"/>
+  <figcaption>左侧是抓取积木的中间状态，右侧是堆叠目标；任务规划决定抓取与放置的顺序，运动规划还需验证每一步的可达性、碰撞与抓持条件，箭头本身不是连续可执行轨迹 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Planning-robot_(cropped).png" target="_blank" rel="noopener noreferrer">Guicho w</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 4. 协同：机器人间耦合约束是什么
 

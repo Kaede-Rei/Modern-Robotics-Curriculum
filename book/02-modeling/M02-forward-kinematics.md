@@ -4,6 +4,7 @@
 
 **先修：** M01、F06；本章以旋量 PoE 作为主要表达，同时介绍标准 DH；二者是不同的参数化方式，在物理模型一致时应当给出相同位姿
 
+
 ## 核心 1. 从平面 2R 推导起步
 
 两根连杆长 $L_1,L_2$，关节角 $q_1$、$q_2$ 均逆时针为正，第二关节角是相对于第一连杆的转角；末端点位置
@@ -17,6 +18,11 @@ $$
 
 输入 $q_1=q_2=0$ 时，机械臂沿 $x$ 轴伸直，末端在 $(L_1+L_2,0)$；输入 $q_1=\pi/2,q_2=0$ 时沿 $y$ 轴伸直；**先用极端构型检验零位，是防止模型符号错误的低成本方法**
 
+<figure class="concept-diagram web-source-figure" data-asset="scheme">
+  <img src="../../assets/figures/web-png/scheme.png" alt="机器人机械臂简化机构图" loading="lazy"/>
+  <figcaption>以第一段方向为关节角起点，第二段的绝对方向由两个关节角叠加决定；末端位置是两段长度向量相加，注意图中角度标注与正文相对角约定的差异 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_Arm_schemat.png" target="_blank" rel="noopener noreferrer">Arczi325</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
+
 ## 核心 2. 变换链中的每一项
 
 把各连杆安装坐标系视作固连刚体的坐标系，对任意相邻关节可以写
@@ -26,6 +32,11 @@ $$
 $$
 
 固定工具安装变换应在末尾显式相乘；这条链输出的是**末端坐标系的位姿**，而不是天然等于法兰盘中心、夹爪尖端或相机光心的坐标
+
+<figure class="concept-diagram web-source-figure" data-asset="kin">
+  <img src="../../assets/figures/web-png/kin.png" alt="正运动学与逆运动学输入输出关系图" loading="lazy"/>
+  <figcaption>正运动学从关节量和几何参数得到末端坐标；逆运动学沿相反方向求关节解，但不是把矩阵乘积直接求逆就能完成，解可能不唯一 · 来源：<a href="https://commons.wikimedia.org/wiki/File:FWDvsINV_Kinematics_HighResTransp.png" target="_blank" rel="noopener noreferrer">Haendy-freak</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心 3. PoE：用零位螺旋轴写运动学
 

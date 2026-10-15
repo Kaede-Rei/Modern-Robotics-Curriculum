@@ -4,8 +4,6 @@
 
 **先修：** L01、L02、F04；**学习目标：**理解动作多峰分布、序列动作、扩散策略与条件生成，明确“数学去噪示例”和真实视觉生成式机器人策略的差别
 
-![两个有效动作模式的平均值未必是可执行动作](../../assets/figures/multimodal-actions.svg)
-
 ## 核心｜1. 均方误差为什么可能产生无效动作
 
 设给定相同观测 $o$，专家一半选择 $a=-1.5$，另一半选择 $a=+1.5$；仅用平方损失训练确定性输出 $f(o)$，其最优值为
@@ -49,6 +47,11 @@ $$
 $$
 
 推理从噪声出发多步生成候选动作，配合真实机器人观测执行滚动规划；训练损失低不保证所有生成动作遵守机器人动力学、碰撞边界或关节限制；这些仍需独立约束和验证
+
+<figure class="concept-diagram web-source-figure" data-asset="diffuse">
+  <img src="../../assets/figures/web-png/diffuse.png" alt="扩散与去噪生成过程示意图" loading="lazy"/>
+  <figcaption>正向过程逐步加噪，反向过程逐步去噪；图中对象是图像，本章动作扩散使用动作序列作为变量，必须额外给出观测条件与动作约束 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Image_diffusion_process.png" target="_blank" rel="noopener noreferrer">Dragweb</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 进阶｜4. Diffusion Policy、ACT 与 Flow Matching
 

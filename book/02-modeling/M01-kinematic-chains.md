@@ -4,6 +4,7 @@
 
 **先修：** F05 刚体表示、F07 机构学；本章聚焦理想刚体运动链；动力学惯量、碰撞模型与传动弹性属于不同层面的模型
 
+
 ## 核心 1. 运动学模型需要的最少信息
 
 一台开链机械臂的运动学模型至少要回答
@@ -84,6 +85,11 @@ $$
 
 在正则点，独立局部自由度由变量维数减去约束雅可比秩得到；若 $\mathbf A$ 降秩，则相应构型需要重新分析，不能继续沿用常规自由度计数结果
 
+<figure class="concept-diagram web-source-figure" data-asset="chain">
+  <img src="../../assets/figures/web-png/chain.png" alt="由四根杆和四个铰点组成的闭合运动链" loading="lazy"/>
+  <figcaption>图中的四根杆首尾闭合，构成一个环；这是树形运动链的反例，建模时可以先断开一条边建立生成树，再显式加入闭环约束，不能将四条边都当成相互独立的关节输入 · 来源：<a href="https://commons.wikimedia.org/wiki/File:KGG_01_Kinematische_Kette.png" target="_blank" rel="noopener noreferrer">Manfred Morgner ( ka-em-zwei-ein )</a> · <a href="https://commons.wikimedia.org/wiki/File:KGG_01_Kinematische_Kette.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
+
 ## 实践 6. 对一个 URDF 进行三层审计
 
 1. **结构层：** parent/child 是否连通，轴方向和关节限制是否符合机械设计
@@ -94,4 +100,4 @@ $$
 
 **练习：** 给工具末端增加一段沿自身 $z$ 轴的 $0.10\ \mathrm m$ 偏移，写出 TCP 位姿的变换链，并说明为何它可能影响末端位置雅可比，却不改变上游关节零位定义
 
-**参考：** Lynch & Park, *Modern Robotics*, Chapters 2–4；ROS `robot_state_publisher` 官方仓库 https://github.com/ros/robot_state_publisher ；ROS URDF 官方文档 https://wiki.ros.org/urdf/XML/joint 
+**参考：** Lynch & Park, *Modern Robotics*, Chapters 2–4；ROS `robot_state_publisher` 官方仓库 https://github.com/ros/robot_state_publisher ；ROS URDF 官方文档 https://wiki.ros.org/urdf/XML/joint

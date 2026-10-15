@@ -4,6 +4,7 @@
 
 **先修：** F08、C01、C02；**学习目标：**区分控制周期、响应时间与抖动，理解 MCU—驱动器—工控机的分工，并能用可测量的时间指标描述闭环执行条件
 
+
 ## 核心｜1. 先区分“算得快”和“按时完成”
 
 设控制周期为 $T_s=10\,\mathrm{ms}$，每次在释放时刻 $r_k=kT_s$ 允许执行，在截止时刻 $d_k=r_k+T_s$ 前完成；一次任务的响应时间定义为
@@ -35,6 +36,11 @@ $$
 这些分工由硬件能力和接口协议决定，不能默认所有驱动器都暴露力矩指令；*位置模式下的驱动器* 与 *具备可验证力矩接口的驱动器* 对阻抗、动力学补偿的实现能力不同，详见 C05
 
 数字控制还涉及保持器和延迟：若离散控制输出 $u_k$ 在一整个周期内保持，典型零阶保持模型为 $u(t)=u_k$（$kT_s\le t<(k+1)T_s$）；总执行延迟与通信延迟会改变控制回路相位裕度，不能只靠提高名义增益补偿
+
+<figure class="concept-diagram web-source-figure" data-asset="rtos">
+  <img src="../../assets/figures/web-png/rtos.png" alt="实时操作系统分层架构示意图" loading="lazy"/>
+  <figcaption>按层区分应用任务、内核与硬件服务；控制周期是否按时完成取决于调度、阻塞和通信等整条执行链，不能仅凭架构分层推断最坏延迟 · 来源：<a href="https://commons.wikimedia.org/wiki/File:RTOS_Architecture_2.png" target="_blank" rel="noopener noreferrer">JohnnyBox</a> · <a href="https://commons.wikimedia.org/wiki/File:RTOS_Architecture_2.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
 
 ## 核心｜3. CAN、EtherCAT、串口与网络通信
 

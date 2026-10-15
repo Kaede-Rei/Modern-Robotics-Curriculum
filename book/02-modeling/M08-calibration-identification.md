@@ -4,6 +4,7 @@
 
 **先修：** F04 最小二乘、M02 正运动学、M06 刚体动力学；**本章核心是可辨识性**，而不是把某个最小二乘求解器包装成万能标定算法
 
+
 ## 1. 先区分三种标定问题
 
 | 任务 | 测量/输入 | 期望输出 | 最大风险 |
@@ -13,6 +14,11 @@
 | 传感器标定 | 观测与参考量 | 内参、外参、时间偏差、偏置 | 时延与坐标系混淆 |
 
 这三种问题可以联合估计，但**几何误差被动力学参数“吸收”**往往不是你想要的正确结果；即使终端误差变小，也不能证明估出的各个参数就是物理真值
+
+<figure class="concept-diagram web-source-figure" data-asset="kuka">
+  <img src="../../assets/figures/web-png/kuka.png" alt="工业机械臂与视觉检测装备实物照片" loading="lazy"/>
+  <figcaption>照片中的机械臂与检测装置对应机器人本体和外部测量链；几何参数误差、相机标定误差与时间同步误差不能混为一个残差来源 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robot_industrial_Kuka_Movicontrol.png" target="_blank" rel="noopener noreferrer">Movicontrol</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 2. 核心：几何参数标定是非线性最小二乘
 
@@ -31,6 +37,11 @@ $$
 如果把平移残差（米）与旋转残差（弧度）直接放在一个无权范数中，隐含了未说明的尺度选择；$\mathbf W_k$ 可以来自测量协方差或明确的设计权重，但不能随意称为“统计最优”
 
 局部线性化得到 $\mathbf r(\boldsymbol\beta+\Delta\boldsymbol\beta)\approx\mathbf r+\mathbf H\Delta\boldsymbol\beta$；可通过奇异值、秩或 Fisher 信息检查局部辨识能力；若同时允许基座、工具及机械臂所有零位自由变化，可能存在无法由数据区分的坐标规范自由度（gauge freedom），需要固定参考定义
+
+<figure class="concept-diagram web-source-figure" data-asset="projection">
+  <img src="../../assets/figures/web-png/projection.png" alt="最小二乘的列空间投影与正交残差" loading="lazy"/>
+  <figcaption>将测量堆叠为残差向量，局部线性化后在参数敏感度矩阵的列空间中寻找修正；若列相关，某些参数组合无法区分，更多相似姿态的样本不一定增加可辨识性 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Least_squares_projection_geometry.png" target="_blank" rel="noopener noreferrer">Eteri byazrova (GraphMath)</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 3. 动力学具有“对惯性参数线性”的重要性质
 

@@ -4,6 +4,7 @@
 
 **先修：** F04 概率、F05 坐标系；**学习目标：**区分被测量、物理状态、可观测性与常见误差；能写出最小测量方程
 
+
 ## 1. 一个统一的测量观点
 
 设希望估计的状态为 $\mathbf x$，标定参数为 $\boldsymbol\theta$，测量 $\mathbf z$ 满足
@@ -43,11 +44,21 @@ $$
 
 常见时间问题包括硬件同步（触发/PPS）、驱动层时间戳、传输延迟、时钟偏移和时钟漂移；数据包到达时间不一定等于曝光或采样的物理时间
 
+<figure class="concept-diagram web-source-figure" data-asset="lidar">
+  <img src="../../assets/figures/web-png/lidar.png" alt="LiDAR 激光测距原理图" loading="lazy"/>
+  <figcaption>跟随光信号的往返路径读飞行时间，距离等于光速乘往返时间再除以二；扫描过程中机器人仍在移动，所以点云中不同点可能对应不同采样时刻 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Concept_of_LiDAR.png" target="_blank" rel="noopener noreferrer">Cartographer3d</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
+
 ## 4. 进阶：协方差、可观测性和标定
 
 局部线性化 $\mathbf z\approx h(\hat{\mathbf x})+\mathbf H(\mathbf x-\hat{\mathbf x})+\mathbf n$，其中 $\mathbf H=\partial h/\partial\mathbf x$；如果 $\mathbf H$ 的某列方向缺少观测灵敏度，需要其他传感器、运动激励或先验约束；多个测量的完整可观测性还与状态动力学有关，不是仅靠单个 $\mathbf H$ 的秩判断
 
 传感器精度、准确度、分辨率、重复性、采样频率与延迟各自不同；尤其不同厂家标注的距离精度与定位精度不能直接比较
+
+<figure class="concept-diagram web-source-figure" data-asset="gaussian">
+  <img src="../../assets/figures/web-png/gaussian.png" alt="二维高斯分布的样本、边缘密度与椭圆等高线" loading="lazy"/>
+  <figcaption>椭圆长轴表示误差更不确定的方向；融合传感器时应同时保留方差和交叉相关，不能仅凭一个标量精度判断所有空间方向的观测质量 · 来源：<a href="https://commons.wikimedia.org/wiki/File:MultivariateNormal.png" target="_blank" rel="noopener noreferrer">Bscan</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></figcaption>
+</figure>
 
 ## 5. 实践：设计机器人传感器记录表
 

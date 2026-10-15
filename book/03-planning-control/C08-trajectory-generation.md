@@ -4,6 +4,7 @@
 
 **先修：** M02～M04、F03；**路线：** 几何路径 → 时间标定 → 速度、加速度、跃度约束
 
+
 ## 1. 区分路径、轨迹和时间参数
 
 路径是几何曲线 $\mathbf q(s)$，$s\in[0,1]$；给定单调时间标定 $s(t)$，才得到随时间变化的轨迹 $\mathbf q(t)=\mathbf q(s(t))$；链式法则
@@ -14,6 +15,11 @@ $$
 $$
 
 所以同一路径经过不同 $s(t)$ 会有不同速度、加速度，进而产生不同扭矩；**路径无碰撞不代表任意时间标定都可执行**
+
+<figure class="concept-diagram web-source-figure" data-asset="robotpath">
+  <img src="../../assets/figures/web-png/robotpath.png" alt="机器人运动路径与规划示意图" loading="lazy"/>
+  <figcaption>路线图首先规定走哪里，时间参数才规定何时到达；相同几何路径可以配上不同速度曲线，检查速度、加速度约束时不能只看路径形状 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robot_Path.PNG" target="_blank" rel="noopener noreferrer">Hmaarya</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 2. 经典三次和五次多项式
 

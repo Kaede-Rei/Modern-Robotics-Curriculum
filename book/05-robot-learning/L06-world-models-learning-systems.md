@@ -4,6 +4,7 @@
 
 **先修：** L03、P03、M06、C07；**学习目标：**理解世界模型预测、规划时的模型偏差、域随机化的真实作用以及从模拟到硬件部署的必要安全分层
 
+
 ## 核心｜1. 世界模型预测什么
 
 一种常见潜变量结构从历史观测和动作得到潜在状态 $z_t$，学习
@@ -23,6 +24,11 @@ $$
 Dreamer 类方法使用学习到的潜在动态在模型中“想象”未来轨迹，并更新价值函数和策略；其具体训练包含序列表示、模型学习和策略/价值学习等模块；MPC 可以每一步根据最新观测重规划，二者可互补但不是同一种算法
 
 即便模型能生成逼真视频，也不代表可精确预测摩擦力、碰撞冲量或机器人机体所承受的接触力；视频观感和可用于安全控制的动力学可信度属于不同验证维度
+
+<figure class="concept-diagram web-source-figure" data-asset="mpc">
+  <img src="../../assets/figures/web-png/mpc.png" alt="模型预测控制滚动优化示意图" loading="lazy"/>
+  <figcaption>预测模型把候选输入展开成未来状态，再比较目标函数；学习得到的世界模型也可用于这种规划，但滚动预测的形式本身并不说明模型来自训练还是解析方程 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Model_predictive_control.png" target="_blank" rel="noopener noreferrer">Tsesea</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心｜3. Sim-to-Real 与域随机化
 

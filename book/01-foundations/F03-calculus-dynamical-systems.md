@@ -4,6 +4,7 @@
 
 **先修：** F02 矩阵与向量；以下均在足够光滑、维度一致的函数上讨论
 
+
 ## 核心 1. 偏导数与多变量链式法则
 
 设 $\mathbf f:\mathbb R^n\to\mathbb R^m$ 可微，它对 $\mathbf q$ 的导数是 $m\times n$ 雅可比矩阵
@@ -51,6 +52,16 @@ $$
 $$
 
 该状态空间形式既可用于控制器设计，也可用于数值积分；连续状态并不意味着传感器能够连续测量；实际观测往往只有离散采样
+
+<figure class="concept-diagram web-source-figure" data-asset="stability">
+  <img src="../../assets/figures/web-png/stability.png" alt="一阶动力系统阶跃响应曲线" loading="lazy"/>
+  <figcaption>横轴是时间，纵轴是响应；曲线在某时刻的斜率对应导数，累计面积对应时间积分，稳定的一阶阶跃响应逐渐变平；图中也有积分与不稳定情形，不能把所有曲线都当成收敛过程 · 来源：<a href="https://commons.wikimedia.org/wiki/File:1st-order_system_step_response.png" target="_blank" rel="noopener noreferrer">Luca Ghio</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
+
+<figure class="concept-diagram web-source-figure" data-asset="lever">
+  <img src="../../assets/figures/web-png/lever.png" alt="力臂与垂直作用力产生力矩的示意图" loading="lazy"/>
+  <figcaption>绕铰点的微小转角会产生切向位移；在力与位移同向的图示条件下，微小功为力乘切向路程，也等于力矩乘转角，有限过程的功应沿运动积分 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Work_on_lever_arm.png" target="_blank" rel="noopener noreferrer">SamL 199917</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心 4. 离散化与数值微分
 

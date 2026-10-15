@@ -4,8 +4,6 @@
 
 **学习结果：** 不只会计算矩阵，还能解释列空间、特征值、SVD、条件数及其机器人含义
 
-![矩阵的奇异值把单位圆沿主方向伸缩为椭圆，图中长度仅作示意](../../assets/figures/linear-map-svd.svg)
-
 ## 核心 1. 向量、基与坐标
 
 三维几何向量 $\mathbf v$ 本身与表达它的坐标列向量不是同一个概念；给定两个正交坐标系 $\{A\},\{B\}$，它们描述同一个向量的坐标满足
@@ -34,6 +32,11 @@ $$
 
 详细讲解请查阅：[F02-核心2.秩、零空间与几何约束-详细讲解](#/explain/F02-core2-rank-nullspace)
 
+<figure class="concept-diagram web-source-figure" data-asset="dof">
+  <img src="../../assets/figures/web-png/dof.png" alt="刚体平移与旋转自由度示意图" loading="lazy"/>
+  <figcaption>三根直箭头与三根弯箭头对应刚体的三维平移和三维转动；这是任务空间的六个分量，不能据此断言任意六关节机械臂的雅可比都满秩 · 来源：<a href="https://commons.wikimedia.org/wiki/File:DOF_Degrees_of_freedom_(mechanics).png" target="_blank" rel="noopener noreferrer">LaurensvanLieshout</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
+
 ## 核心 3. 内积、范数与正交投影
 
 向量内积 $\mathbf a^T\mathbf b$ 与夹角、功和能量直接相关；常用 $2$-范数为 $\|\mathbf x\|_2=\sqrt{\mathbf x^T\mathbf x}$
@@ -51,6 +54,11 @@ $$
 $$
 
 如果 $\mathbf A$ 列满秩，解唯一且为 $(\mathbf A^T\mathbf A)^{-1}\mathbf A^T\mathbf b$；**但数值实现一般不要显式计算这个逆或直接形成正规方程**：可优先使用 QR 或 SVD，以避免平方条件数引起的精度恶化
+
+<figure class="concept-diagram web-source-figure" data-asset="projection">
+  <img src="../../assets/figures/web-png/projection.png" alt="最小二乘的列空间投影与正交残差" loading="lazy"/>
+  <figcaption>图中目标向量投影到列空间，残差垂直于该平面；这就是正规方程中残差与每一列都正交的几何意义，残差为零仅在目标位于列空间时成立 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Least_squares_projection_geometry.png" target="_blank" rel="noopener noreferrer">Eteri byazrova (GraphMath)</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心 4. 特征值、正定性与动力学
 
@@ -86,11 +94,21 @@ $$
 
 它给出最小二乘问题中的**最小范数解**，但靠近奇异位置时依然可能使求得的输入非常大，因此工程上常引入阻尼
 
+<figure class="concept-diagram web-source-figure" data-asset="circle">
+  <img src="../../assets/figures/web-png/circle.png" alt="圆与椭圆的几何形状对照" loading="lazy"/>
+  <figcaption>把圆看作等范数输入集合，线性映射后可以成为椭圆；对单位圆和给定矩阵，半轴长度才对应奇异值，原图没有指定矩阵与单位，不应直接从图形比例读取某个机械臂的奇异值 · 来源：<a href="https://commons.wikimedia.org/wiki/File:A_circle,_and_an_ellipse.png" target="_blank" rel="noopener noreferrer">Dino</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
+
 ## 进阶 6. 坐标尺度与条件数陷阱
 
 同时包含线速度（m/s）和角速度（rad/s）的六维速度向量，若未经特征长度或任务权重归一化，直接对其雅可比计算一个“通用灵巧度/条件数”，结果会依赖单位尺度；更换米与毫米会改变数值，却不会改变真实机械臂
 
 因此，比较不同机器人时必须说明任务维度、归一化和度量选择；仅报告一个最小奇异值是不够的
+
+<figure class="concept-diagram web-source-figure" data-asset="svd">
+  <img src="../../assets/figures/web-png/svd.png" alt="相关数据的 SVD 主方向与尺度" loading="lazy"/>
+  <figcaption>图中以相关测量数据说明主方向；在中心化数据上，SVD 的主方向与协方差特征向量相关，但方向和尺度会随变量单位改变，因此机器人任务中的米与弧度需要先约定度量 · 来源：<a href="https://commons.wikimedia.org/wiki/File:SVD_Graphic_Example.png" target="_blank" rel="noopener noreferrer">Sharayanan ( Sharayanan )</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 实践 7. 两个计算实验
 

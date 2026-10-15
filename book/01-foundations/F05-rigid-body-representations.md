@@ -4,6 +4,7 @@
 
 **先修：** F02；本文严格使用 `book/notation.md` 的坐标约定：${}^A\mathbf R_B$ 将 $B$ 系向量坐标转换为 $A$ 系坐标
 
+
 ## 核心 1. 先分清点、位移向量和坐标系
 
 设 $B$ 原点相对于 $A$ 系的位置为 ${}^A\mathbf p_B$；同一个空间点 $P$ 在两坐标系中的坐标满足
@@ -26,6 +27,11 @@ $$
 正交性保证长度、夹角不变，行列式为 $+1$ 排除镜像翻转；旋转矩阵的逆是转置：$\mathbf R^{-1}=\mathbf R^T$；旋转可相乘，但有限旋转通常**不可交换**
 
 例如绕固定 $z$ 轴转 $90^\circ$ 后绕固定 $x$ 轴转 $90^\circ$，与反过来旋转的最终姿态一般不同；写出矩阵乘积时，必须说明是绕固定轴还是随体轴旋转
+
+<figure class="concept-diagram web-source-figure" data-asset="diagonal">
+  <img src="../../assets/figures/web-png/diagonal.png" alt="三维旋转的坐标轴关系" loading="lazy"/>
+  <figcaption>图中围绕立方体对角轴的转动改变向量方向，却不改变长度；这对应旋转矩阵的正交性，读图时要固定坐标系并区分主动旋转与坐标变换 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Diagonal_rotation.png" target="_blank" rel="noopener noreferrer">MathsPoetry</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 核心 3. 齐次变换一次处理旋转与平移
 
@@ -84,6 +90,11 @@ $$
 $\mathbf q_R$ 和 $-\mathbf q_R$ 代表同一个物理姿态，称作双覆盖；如果做姿态插值，常先通过四元数内积选择短路径一侧，再做球面线性插值（SLERP）；四元数数值积分应注意归一化漂移
 
 **注意：** 单位四元数不同于关节坐标 $\mathbf q$；本教程用下标 $R$ 区分两者
+
+<figure class="concept-diagram web-source-figure" data-asset="qrot">
+  <img src="../../assets/figures/web-png/qrot.png" alt="四元数空间旋转示意图" loading="lazy"/>
+  <figcaption>由旋转轴和转角理解单位四元数：标量部对应半角余弦，向量部沿旋转轴；四元数及其整体相反数表示同一个姿态，插值时需要处理这个双重表示 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Quaternionic_rotation.png" target="_blank" rel="noopener noreferrer">HansVanLeunen</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 进阶 6. 姿态误差与矩阵对数
 

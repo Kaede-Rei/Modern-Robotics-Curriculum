@@ -4,8 +4,6 @@
 
 **先修：** P03、P04、F06；**目标：**区分 VO/VIO/LIO、建图、闭环、重定位和全局地图锚定；理解因子图残差及可观测性
 
-![回环观测增加约束，图示仅表达优化作用而非具体 SLAM 精度](../../assets/figures/slam-loop-closure.svg)
-
 ## 1. 五种常被混用的任务
 
 | 任务 | 主要输出 | 不能直接承诺 |
@@ -17,6 +15,11 @@
 | 重定位 | 在已有地图中重新估计当前位置/姿态 | 能成功依赖地图、几何与匹配质量 |
 
 **局部低漂移不等于全局无漂移；“有地图”不代表必然具有高质量回环优化；** FAST-LIO2 强项是快速紧耦合 LiDAR–IMU 里程计及增量地图维护，不应仅因名字包含 mapping 就把它等同于全局闭环 SLAM
+
+<figure class="concept-diagram web-source-figure" data-asset="slam">
+  <img src="../../assets/figures/web-png/slam.png" alt="在线 SLAM 的状态、控制、观测与地图依赖关系" loading="lazy"/>
+  <figcaption>图中状态、控制、观测和地图通过概率依赖关系相连；SLAM 同时估计轨迹和地图，不能把这张依赖图误读为已经求出的真实地图 · 来源：<a href="https://commons.wikimedia.org/wiki/File:OnlineSLAM.png" target="_blank" rel="noopener noreferrer">Krzysztof.zielinski</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 2. 为什么相对运动误差会积累
 

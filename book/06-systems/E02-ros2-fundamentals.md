@@ -4,6 +4,7 @@
 
 **先修：** M01、P02、E01；**学习目标：**根据数据语义正确选择 ROS2 通信形式，掌握 TF2 的时空一致性，理解 `ros2_control` 的职责与边界
 
+
 ## 核心｜1. ROS2 不是控制算法
 
 ROS2 提供机器人程序的通信和组织机制，而不是自动保证算法精度、实时性或硬件安全；常见组成包括节点、消息、服务、Action、参数、生命周期、日志和时间系统
@@ -17,6 +18,11 @@ ROS2 提供机器人程序的通信和组织机制，而不是自动保证算法
 | Lifecycle | 受控配置、激活与停止 | 节点激活不等于整机已具备运动许可 |
 
 ROS2 通常以 DDS/RMW 实现传输抽象；实际通信兼容性还取决于 QoS 兼容性、网络拓扑、消息大小和所选中间件实现
+
+<figure class="concept-diagram web-source-figure" data-asset="ros">
+  <img src="../../assets/figures/web-png/ros.png" alt="ROS 软件架构关系图" loading="lazy"/>
+  <figcaption>这是 ROS 生态功能概览，用于识别感知、规划、驱动等模块；图中没有展开 ROS2 的 DDS、QoS 与 Executor，后文接口配置应以正文约定为准 · 来源：<a href="https://commons.wikimedia.org/wiki/File:ROS_architecture.png" target="_blank" rel="noopener noreferrer">Huseyin Kutluca</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心｜2. QoS 要按数据语义配置
 

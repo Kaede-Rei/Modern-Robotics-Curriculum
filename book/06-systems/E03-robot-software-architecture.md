@@ -4,6 +4,7 @@
 
 **先修：** E02、C09、C10；**学习目标：**区分算法、任务编排与执行监督，理解 MoveIt2、Nav2、FSM/BT 之间的职责，以及失败恢复设计
 
+
 ## 核心｜1. 从数据流到任务流
 
 一个机器人系统至少需要三个不同层级
@@ -13,6 +14,11 @@
 3. **任务层**：决定何时开始、取消、重试、退避及完成
 
 错误的设计是让视觉节点在检测到目标时直接给驱动器发送不受约束的动作，绕过任务监督、碰撞检查与安全许可
+
+<figure class="concept-diagram web-source-figure" data-asset="ros">
+  <img src="../../assets/figures/web-png/ros.png" alt="ROS 软件架构关系图" loading="lazy"/>
+  <figcaption>图中各模块是功能边界；系统设计还需在边界上定义输入输出、频率、时间戳和失败行为，功能模块齐全不等于执行流程闭合 · 来源：<a href="https://commons.wikimedia.org/wiki/File:ROS_architecture.png" target="_blank" rel="noopener noreferrer">Huseyin Kutluca</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心｜2. MoveIt2 与 Nav2 解决的问题不同
 

@@ -4,6 +4,7 @@
 
 **先修：** L04、P04、M03、E01（工程接口部分可预习）；**学习目标：**区分 VLM 与 VLA、动作表征及跨本体迁移，认识当前评测证据与实际部署的距离
 
+
 ## 核心｜1. VLM、VLA、机器人控制器是不同层
 
 视觉语言模型（VLM）通常根据图像和文本输出语义或语言信息，并**不天然生成与电机接口兼容的动作**；视觉—语言—动作（VLA）模型显式学习从多模态观测及任务指令到动作的策略
@@ -15,6 +16,11 @@ $$
 其中 $I$ 表示图像、$q$ 表示本体状态、$\ell$ 表示语言指令；这只是抽象表示，不保证所有具体 VLA 都使用全部这些输入，或预测同一种动作形式
 
 **可执行动作**必须包含明确的约定：关节位置/增量、TCP 位置或速度、夹爪开合、控制频率、单位、坐标系、动作截断与软硬件安全边界；即使模型可以输出文本形式的机器人动作 token，也不意味着它理解机器人的真实扭矩上限或碰撞空间
+
+<figure class="concept-diagram web-source-figure" data-asset="transform">
+  <img src="../../assets/figures/web-png/transform.png" alt="Transformer 编码器解码器结构示意图" loading="lazy"/>
+  <figcaption>从输入嵌入、注意力到输出读通用 Transformer 结构；机器人 VLA 还要定义视觉与语言输入、动作编码及执行接口，这张图不代表某个具体 VLA 系统 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Transformer,_full_architecture.png" target="_blank" rel="noopener noreferrer">dvgodoy</a> · <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></figcaption>
+</figure>
 
 ## 核心｜2. 经典代表工作与准确的贡献边界
 

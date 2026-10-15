@@ -13,6 +13,7 @@ import subprocess
 import sys
 from bs4 import BeautifulSoup
 import yaml
+from image_assets import read_png
 
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / 'book/catalog.yml'
@@ -20,6 +21,9 @@ TEMPLATE = ROOT / 'reader/template.html'
 OUTPUT = ROOT / 'dist/index.html'
 DETAIL_CATALOG = ROOT / 'book/explanations/catalog.yml'
 LABS = json.loads((ROOT / 'reader/learning-labs.json').read_text(encoding='utf-8'))
+WEB_PNG_ASSETS = json.loads((ROOT / 'assets/figures/web-png-sources.json').read_text(encoding='utf-8'))['assets']
+WEB_PNG_BY_URL = {item['url']: item for item in WEB_PNG_ASSETS.values()}
+WEB_PNG_BY_PATH = {(ROOT / item['local']).resolve(): item for item in WEB_PNG_ASSETS.values()}
 LAB_BY_ID = {lab['id'].upper(): lab for lab in LABS}
 
 
@@ -80,13 +84,15 @@ def convert_markdown(path: Path, *, chapter: str) -> dict:
         src = img.get('src', '')
         if src.startswith('data:'):
             continue
-        if src.startswith('http:') or src.startswith('https:'):
-            raise ValueError(f'Network image prohibited in offline textbook: {src}')
+        if src.startswith(('http:', 'https:', '//')):
+            raise ValueError(f'Remote image is not allowed in offline source: {src}; download and use a local path')
         image = (path.parent / src).resolve()
         if not image.is_file() or not image.is_relative_to(ROOT):
             raise FileNotFoundError(f'Missing/out-of-tree image {src} in {path}')
         mime = mimetypes.guess_type(image.name)[0] or 'application/octet-stream'
-        img['src'] = f'data:{mime};base64,' + base64.b64encode(image.read_bytes()).decode('ascii')
+        contents = read_png(image, WEB_PNG_BY_PATH.get(image)) if mime == 'image/png' else image.read_bytes()
+        img['src'] = f'data:{mime};base64,' + base64.b64encode(contents).decode('ascii')
+        img['data-image-source'] = 'embedded'
     for tag in soup.find_all(['script', 'iframe']):
         if tag.get('src') or tag.name == 'iframe':
             raise ValueError(f'External scripts/iframes not allowed in {path}')

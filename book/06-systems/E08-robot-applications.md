@@ -4,6 +4,7 @@
 
 **先修：** E06、M07、L06；**学习目标：**识别共性机器人模型与领域特有约束，为不同形态和行业选择正确的进一步学习路线
 
+
 ## 核心｜1. 共同骨架与差异所在
 
 绝大多数机器人系统都存在感知、状态估计、任务规划、运动生成、反馈控制与执行器约束；然而各平台的动力学结构、接触模式、可观测状态、失效代价不同
@@ -27,6 +28,11 @@
 设计顺序建议是**明确任务与风险 → 识别物理约束与感知限制 → 选择机构与执行器 → 选择可用的数学模型 → 规划与控制 → 实验验证**
 
 例如一台番茄采摘机器人首先需要确认果柄位置和可视性、接触力上限、末端执行器结构、操作空间与定位误差，再决定是否需要精确的逆动力学、视觉伺服或柔顺控制；仅把更复杂的控制器引入系统，并不能自动克服视觉遮挡或末端执行器设计缺陷
+
+<figure class="concept-diagram web-source-figure" data-asset="rov">
+  <img src="../../assets/figures/web-png/rov.png" alt="水下机器人机械臂真实照片" loading="lazy"/>
+  <figcaption>水下机械臂说明任务环境会改变建模重点；除了关节运动，还可能需要浮力、流体阻力和密封约束，不能把陆地机械臂参数直接搬到水下 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_ROV_Manipulator_Arm.png" target="_blank" rel="noopener noreferrer">BPLINFO</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心｜3. 工业与农业场景的成功定义
 

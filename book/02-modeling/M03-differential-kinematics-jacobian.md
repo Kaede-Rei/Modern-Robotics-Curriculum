@@ -6,6 +6,7 @@
 
 **建议先修：** M02 正运动学、F03 多元微分、F05 刚体空间表示；相关章节介绍了必要概念，本文在使用时仍给出关键定义
 
+
 ## 1. 先理解：末端为什么会动得更快
 
 试着水平伸直手臂，缓慢转动肩关节；虽然肩部角速度不大，手掌也会划过很长的弧线；离转轴越远，同样的角速度产生的线速度越大
@@ -216,6 +217,11 @@ $$
 $$
 
 例如 $q_1=0$ 时，第二关节轴穿过 $(L_1,0,0)$，故该旋转轴的 twist 线分量是 $[0,-L_1,0]^T$；将 $\mathbf J_s\dot{\mathbf q}$ 的角速度和线分量代入第 4.1 节公式，可以再次得到第 2.3 节的末端线速度
+
+<figure class="concept-diagram web-source-figure" data-asset="6dof">
+  <img src="../../assets/figures/web-png/6dof.png" alt="六自由度机械臂关节轴示意图" loading="lazy"/>
+  <figcaption>六个关节轴给出关节运动的几何方向；雅可比的每一列描述单个关节单位速度的末端贡献，列之间是否独立取决于当前构型和任务定义 · 来源：<a href="https://commons.wikimedia.org/wiki/File:6_Degree-of-Freedom_Robot_Diagram.png" target="_blank" rel="noopener noreferrer">Israel adilman</a> · <a href="https://creativecommons.org/licenses/by/4.0" target="_blank" rel="noopener noreferrer">CC BY 4.0</a></figcaption>
+</figure>
 
 ## 5. 雅可比奇异性：为什么有些方向动不了
 

@@ -4,6 +4,7 @@
 
 **先修：** F02～F04、P01；**目标：**掌握贝叶斯预测—校正、KF/EKF/UKF/粒子滤波、因子图的数学关系和适用边界
 
+
 ## 1. 贝叶斯滤波：同一问题的统一递推
 
 令状态为 $\mathbf x_k$、控制/运动输入为 $\mathbf u_k$、观测为 $\mathbf z_k$，全部过去观测记为 $\mathbf z_{1:k}$；在适当一阶马尔可夫和条件独立假设下，预测及校正为
@@ -39,6 +40,16 @@ $$
 $$
 
 它可减轻浮点误差造成的非对称/非正定，但**不能修复错误的噪声模型**
+
+<figure class="concept-diagram web-source-figure" data-asset="kalman">
+  <img src="../../assets/figures/web-png/kalman.png" alt="卡尔曼滤波状态与观测模型" loading="lazy"/>
+  <figcaption>状态沿时间演化，观测通过测量矩阵与状态相连；过程噪声协方差 Q 与测量噪声协方差 R 分别影响预测和更新，不能把两者当作同一种噪声调节旋钮 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Kalman_filter_model.png" target="_blank" rel="noopener noreferrer">Own work by Ciphergoth .</a> · <a href="https://commons.wikimedia.org/wiki/File:Kalman_filter_model.png" target="_blank" rel="noopener noreferrer">Public domain</a></figcaption>
+</figure>
+
+<figure class="concept-diagram web-source-figure" data-asset="gaussian">
+  <img src="../../assets/figures/web-png/gaussian.png" alt="二维高斯分布的样本、边缘密度与椭圆等高线" loading="lazy"/>
+  <figcaption>预测和测量更新会改变状态分布的中心与形状；椭圆方向由协方差特征向量决定，等马氏距离半轴按特征值平方根缩放，置信概率还取决于维度与所选阈值 · 来源：<a href="https://commons.wikimedia.org/wiki/File:MultivariateNormal.png" target="_blank" rel="noopener noreferrer">Bscan</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></figcaption>
+</figure>
 
 ## 3. EKF、UKF 与粒子滤波有什么区别
 

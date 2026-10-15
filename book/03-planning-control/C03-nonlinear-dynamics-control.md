@@ -4,6 +4,7 @@
 
 **先修：** M06、C01；**路线：** 关节重力补偿 → 计算力矩 → 跟踪稳定性 → 模型失配和安全边界
 
+
 ## 1. 明确对象、模型及误差
 
 在无外部接触的固定基刚体机械臂，先忽略或已显式补偿摩擦，考虑
@@ -31,6 +32,11 @@ $$
 若 $\mathbf K_p,\mathbf K_d$ 为正的对角增益，关节误差按独立二阶方程衰减；常用 $\mathbf K_p=\operatorname{diag}(\omega_{n,i}^2)$、$\mathbf K_d=\operatorname{diag}(2\zeta_i\omega_{n,i})$；这里增益在*计算加速度*的括号内部，量纲为 $\mathrm{s}^{-2}$、$\mathrm{s}^{-1}$，不要直接当作 N·m/rad 的扭矩刚度
 
 **注意：** 此为逆动力学反馈线性化，并非说机械臂在现实中不再有模型误差、饱和或接触
+
+<figure class="concept-diagram web-source-figure" data-asset="stability">
+  <img src="../../assets/figures/web-png/stability.png" alt="一阶动力系统阶跃响应曲线" loading="lazy"/>
+  <figcaption>模型补偿后得到的误差方程可以用响应曲线理解：斜率、衰减和发散对应不同误差动力学；这里是一阶系统示意，不能替代本章二阶误差方程的稳定性证明 · 来源：<a href="https://commons.wikimedia.org/wiki/File:1st-order_system_step_response.png" target="_blank" rel="noopener noreferrer">Luca Ghio</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 3. 进阶：严格证明和它的边界
 

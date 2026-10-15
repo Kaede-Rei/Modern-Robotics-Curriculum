@@ -10,7 +10,7 @@
 
 - 六篇 49 章，覆盖数学与机构、建模、规划与控制、感知与估计、机器人学习和系统工程
 - 按 **核心 → 进阶 → 实践** 组织章节，结合物理直觉、公式推导、几何图示、例题和练习
-- `dist/index.html` 是自包含的教材入口，正文、插图、样式和基础交互均内嵌在一个文件中
+- `dist/index.html` 包含正文、全部配图、数学公式、样式和交互，复制单个文件即可断网阅读
 - 提供离线章节导航、全文搜索、数学公式、响应式阅读、12 项参数交互实验与二维机械臂运动示意
 - 提供独立的「部分教学详细讲解」入口，支持从正文知识点进入补充讲解及返回原文
 - `labs/python/` 提供可复现实验，包括运动学、动力学、控制、规划、感知、学习和系统工程示例
@@ -25,7 +25,9 @@
 
 **阅读教材**
 
-打开 `dist/index.html`，无需安装 Python、启动服务或连接网络
+打开 [`dist/index.html`](dist/index.html)，无需安装 Python 或启动服务，文字、全部图片、公式和交互实验均离线可用
+
+仓库已经包含全部图片，无需首次联网下载；图注的外部来源链接只用于查阅原出处，阅读教材不会请求这些网站
 
 **重新构建教材**
 
@@ -33,11 +35,36 @@
 
 ```bash
 python -m pip install -r requirements-build.txt
+# 检查随仓库附带的 PNG，不访问网络
+python scripts/fetch_web_png.py --check
 python scripts/build_book.py
 python scripts/check_book.py
 ```
 
 章节正文维护在 `book/`，请勿直接修改构建产物 `dist/index.html`
+
+**配图与来源**
+
+- 49 章配图已放在对应知识点旁，图注说明图中对象与公式的关系及适用边界
+- 41 项现成网络 PNG 随仓库保存，包含真实机器人照片、官方展示图、机构和算法示意图；新增最小二乘投影、二维高斯分布与 SVD 数据图
+- F02 详细页保留 UR16e 实物照片、OpenArm 官方展示图，以及原有秩、奇异性与冗余交互
+- [图片来源清单](assets/figures/SOURCES.md) 记录作者、许可和教学位置；[JSON 清单](assets/figures/web-png-sources.json) 记录原始 URL、实际下载 URL、尺寸与 SHA-256
+- 构建器禁止在线图片地址；缺图或 PNG 损坏时停止，不会退回网络加载；检查脚本检查所有章节、补充讲解及图片完整性
+- 如需恢复缺失文件，可联网运行 `python scripts/fetch_web_png.py`；已有文件先校验，下载通过解码和哈希验证后才原子写入，遇到源站限流即停止，稍后可续跑
+- 源站重编码可能使下载内容与归档哈希不符，此时需核对版本与来源再更新清单，不应忽略校验错误
+
+**验证离线阅读**
+
+```bash
+python -m unittest discover -s tests -v
+python scripts/check_book.py
+# 可选：安装浏览器验收工具后，在断网模式访问全部页面并操作交互控件
+python -m pip install playwright
+python -m playwright install chromium
+python scripts/check_reader_browser.py
+```
+
+浏览器验收将 HTML 单独复制到临时目录，禁止网络访问，检查全部配图解码、12 项实验滑块、二维机械臂和 F02 三项演示，以及窄屏布局
 
 **运行教学实验**
 

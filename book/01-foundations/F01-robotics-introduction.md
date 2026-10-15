@@ -4,6 +4,7 @@
 
 **学习结果：** 能区分构型、状态、任务空间、工作空间；能画出机器人反馈链，并解释其每一环的输入与输出
 
+
 ## 核心 1. 从一个可检验的任务出发
 
 设机器人需要用机械臂摘取某个果实；一个“伸手过去”的指令包含至少六个不同问题
@@ -16,6 +17,11 @@
 6. **系统**：时钟、通信、执行器与安全监控如何协同
 
 每一项都可能让系统失败；例如位置估计准确并不意味着机械臂一定可达，而机械臂可达也不意味着路径没有障碍；**机器人学的核心不是某一个算法，而是多个物理与计算模型组成的闭环**
+
+<figure class="concept-diagram web-source-figure" data-asset="dobot">
+  <img src="../../assets/figures/web-png/dobot.png" alt="Dobot 机械臂在桌面作业中的实物照片" loading="lazy"/>
+  <figcaption>先从照片找出工具、工件与工作台，再把任务写成可测量的位姿、节拍与成功条件；同一机械臂更换工具后，任务模型和约束也会改变 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Dobot-_A_Robot_arm.png" target="_blank" rel="noopener noreferrer">DangerAlpha</a> · <a href="http://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" rel="noopener noreferrer">CC0</a></figcaption>
+</figure>
 
 ## 核心 2. 常用数学对象
 

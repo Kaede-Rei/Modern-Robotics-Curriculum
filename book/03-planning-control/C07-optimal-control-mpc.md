@@ -4,6 +4,7 @@
 
 **先修：** F04、C02；**层次：** 有限时域优化 → 动态规划/PMP → MPC 可行性与稳定条件
 
+
 ## 1. 把“最优”写成明确目标
 
 考虑离散模型 $\mathbf x_{k+1}=f_d(\mathbf x_k,\mathbf u_k)$；给定预测长度 $N$，决策变量是 $\mathbf u_{0:N-1}$（亦可含预测状态），一类优化问题为
@@ -47,6 +48,11 @@ V_f(f_d(\mathbf x,\kappa_f(\mathbf x)))-V_f(\mathbf x)
 $$
 
 以及终端集合在相应控制下保持约束与正向不变等条件；合适条件下可推导递归可行性与闭环稳定；实际系统的估计误差、计算超时和模型失配还需考虑鲁棒 MPC 或安全降级
+
+<figure class="concept-diagram web-source-figure" data-asset="mpc">
+  <img src="../../assets/figures/web-png/mpc.png" alt="模型预测控制滚动优化示意图" loading="lazy"/>
+  <figcaption>竖线左侧是过去，右侧是当前时刻预测的未来；每次优化一串输入，只执行第一步，再用新测量重新预测，因此预测轨迹不等于最终实测轨迹 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Model_predictive_control.png" target="_blank" rel="noopener noreferrer">Tsesea</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 5. 工程里最容易漏掉的问题
 

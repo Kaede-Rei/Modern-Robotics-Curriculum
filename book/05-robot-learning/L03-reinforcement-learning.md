@@ -4,6 +4,7 @@
 
 **先修：** F04、C01、L01；**学习目标：**解释 MDP、Bellman 方程、Q-learning 与策略梯度，区分在线 RL、离线 RL 和模型式 RL 的适用边界
 
+
 ## 核心｜1. 马尔可夫决策过程（MDP）
 
 MDP 通常记为 $(\mathcal S,\mathcal A,P,r,\gamma)$；$P(s'\mid s,a)$ 描述转移，$r(s,a,s')$ 为一步奖励，$\gamma\in[0,1)$ 为折扣因子；给定策略 $\pi$，回报为
@@ -50,6 +51,13 @@ Actor 负责动作分布，Critic 估计价值；PPO、SAC 等是具体算法族
 - **离线 RL**仅从固定数据集训练，可能因为评价了未见过的动作而高估价值
 - **安全约束**可描述为约束 MDP，但惩罚系数不是严格安全保证；硬件限位、控制屏障与监控层仍不可省略
 - **Sim-to-Real**受接触摩擦、延迟、驱动饱和、传感器标定与仿真器偏差影响
+
+<figure class="concept-diagram web-source-figure" data-asset="decision">
+  <img src="../../assets/figures/web-png/decision.png" alt="Decision Transformer 序列决策架构" loading="lazy"/>
+  <figcaption>Decision Transformer 把回报目标、状态和动作组织成序列；这属于离线序列建模路线，图中 Transformer 结构不能直接替代 Bellman 更新或在线探索过程 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Decision_Transformer_architecture.png" target="_blank" rel="noopener noreferrer">Lili Chen and Kevin Lu and Aravind Rajeswaran and Kimin Lee and Aditya Grover and Michael Laskin and Pieter Abbeel and Aravind Srinivas and Igor Mordatch</a> · <a href="http://opensource.org/licenses/mit-license.php" target="_blank" rel="noopener noreferrer">MIT</a></figcaption>
+<details class="image-license"><summary>图片许可全文 · MIT</summary><pre>This file is licensed under the Expat License , sometimes known as the MIT License : Copyright ©  The author(s) Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &quot;Software&quot;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. The Software is provided &quot;as is&quot;, without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose and noninfringement. In no event shall the authors or copyright holders be liable for any claim, damages or other liability, whether in an action of contract, tort or otherwise, arising from, out of or in connection with the Software or the use or other dealings in the Software.
+</pre></details>
+</figure>
 
 ## 实践｜5. 七状态一维导航
 

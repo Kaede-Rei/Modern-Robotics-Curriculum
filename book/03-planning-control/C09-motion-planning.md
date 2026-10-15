@@ -4,11 +4,17 @@
 
 **先修：** M01～M04、C08；**结构：** 构型空间 → 碰撞 → 图搜索/采样规划 → 时间参数化与优化
 
+
 ## 1. 构型空间比末端的二维路线更重要
 
 一台 $n$ 关节机器人配置为 $\mathbf q\in\mathcal C$；关节范围和闭链条件决定合法构型集合；定义障碍集合 $\mathcal C_{\mathrm{obs}}$，自由空间 $\mathcal C_{\mathrm{free}}=\mathcal C\setminus\mathcal C_{\mathrm{obs}}$；机械臂末端轨迹不与障碍物相交仍不能保证**中间连杆、线缆、工具和本体**不碰撞
 
 规划通常寻找连续曲线 $\sigma:[0,1]\to\mathcal C_{\mathrm{free}}$，满足起点与目标约束；控制和运动学还需要检查可达性、关节限位和执行速度
+
+<figure class="concept-diagram web-source-figure" data-asset="scheme">
+  <img src="../../assets/figures/web-png/scheme.png" alt="机器人机械臂简化机构图" loading="lazy"/>
+  <figcaption>图中两根杆的关节角可以作为二维构型空间的坐标；改变任一关节会带动整段机构，障碍检查应覆盖全部连杆，不能仅检查末端位置 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_Arm_schemat.png" target="_blank" rel="noopener noreferrer">Arczi325</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 2. 核心：离散搜索和启发式
 

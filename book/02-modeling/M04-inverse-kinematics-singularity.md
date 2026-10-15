@@ -4,6 +4,7 @@
 
 **先修：** F02、M02、M03；逆运动学需要同时考虑任务定义、几何可达性、关节限位及数值迭代收敛性
 
+
 ## 核心 1. 逆运动学不是普通矩阵求逆
 
 已知期望工具位姿 $\mathbf T_d\in SE(3)$，逆运动学要找合法 $\mathbf q$ 使
@@ -16,6 +17,11 @@ $$
 任务可能不可达、具有离散多组解，或在冗余机械臂中具有连续的解集；若考虑碰撞、关节速度、奇异性及路径连接问题，还需要进一步规划
 
 **位置 IK 与完整位姿 IK 是不同任务；** 例如平面 2R 只有两个独立关节，通常不能同时任意独立指定 $(x,y,\theta)$ 三个任务量
+
+<figure class="concept-diagram web-source-figure" data-asset="kin">
+  <img src="../../assets/figures/web-png/kin.png" alt="正运动学与逆运动学输入输出关系图" loading="lazy"/>
+  <figcaption>图中逆运动学由期望末端坐标回到关节角；一个末端目标可能对应多组关节解，也可能不可达，这正是逆运动学不同于一般函数求值的地方 · 来源：<a href="https://commons.wikimedia.org/wiki/File:FWDvsINV_Kinematics_HighResTransp.png" target="_blank" rel="noopener noreferrer">Haendy-freak</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 核心 2. 二连杆的解析 IK：余弦定理
 
@@ -81,6 +87,11 @@ $$
 该表达用于推导，实际实现宜直接解线性系统而非显式求逆；阻尼保证更新有界，但会引入偏差，也不保证复杂非线性 IK 的全局收敛
 
 一般迭代可写为 $\mathbf q_{k+1}=\Pi_{\mathcal Q}(\mathbf q_k+\alpha\Delta\mathbf q)$，其中 $\Pi_{\mathcal Q}$ 是满足关节位置限制的投影操作，$\alpha$ 是步长；直接裁剪可保证位置限位，但可能破坏其他约束；复杂问题需约束优化
+
+<figure class="concept-diagram web-source-figure" data-asset="projection">
+  <img src="../../assets/figures/web-png/projection.png" alt="最小二乘的列空间投影与正交残差" loading="lazy"/>
+  <figcaption>当期望的微小末端位移不在雅可比列空间中时，伪逆给出最小二乘近似；图中的正交残差代表当前瞬间无法实现的分量，有限步更新后还要重新计算雅可比 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Least_squares_projection_geometry.png" target="_blank" rel="noopener noreferrer">Eteri byazrova (GraphMath)</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 进阶 5. 六维位姿误差必须与雅可比匹配
 

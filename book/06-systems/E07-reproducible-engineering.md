@@ -4,6 +4,7 @@
 
 **先修：** F04、E01、E06；**学习目标：**能够设计有独立指标和必要日志的实验，区分软件测试、仿真结果与真实机器人的证据强度
 
+
 ## 核心｜1. 将目标转成可检验的假设
 
 例如“新控制器更稳定”不是充分精确的实验假设；一个可检验描述是：在相同机械臂、相同轨迹、控制周期、负载与扰动条件下，新控制器的末端稳态误差和 95% 跟踪误差分位数低于基线，且未增加保护停机次数
@@ -56,6 +57,11 @@ $$
 推荐保存代码提交标识（commit/tag）、环境依赖、传感器外参、机器人 URDF/惯性参数、控制参数、随机种子、场景条件和时间同步方式；若存在丢帧或人为停止实验，必须记录而不能悄悄删除失败样本
 
 涉及轨迹估计时需明确 APE/RPE 的对齐方式、真值来源及重定位/回环期间的统计边界；涉及辨识时需区分训练残差与未参与拟合的测试误差
+
+<figure class="concept-diagram web-source-figure" data-asset="calib">
+  <img src="../../assets/figures/web-png/calib.png" alt="双目视觉视差与深度关系示意图" loading="lazy"/>
+  <figcaption>以双目深度为例，输入视差的微小变化会改变输出深度，尤其在远处被放大；复现实验需同时保存标定参数和误差假设，才能比较不同运行的指标 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Visual_disparity_-_depth_from_2D.png" target="_blank" rel="noopener noreferrer">Sbitzer at English Wikipedia</a> · <a href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 实践｜6. 实验指标与验证
 

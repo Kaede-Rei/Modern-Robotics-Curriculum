@@ -4,6 +4,7 @@
 
 **先修：** F07 机构学、M06 刚体动力学、M07 约束动力学；**定位：** 不追求给所有特殊机器人一套万能模型，而是说明何时必须扩展固定基、全驱动、刚性连杆假设
 
+
 ## 1. 三个隐藏在经典机械臂模型里的前提
 
 固定基串联机械臂的常见模型
@@ -15,6 +16,11 @@ $$
 隐含了：基座固定；广义坐标的独立性已确定；执行器可以直接向对应关节施加所建模的广义力；它还往往近似忽略关节弹性、传动背隙和连杆形变
 
 当研究腿足机器人、欠驱动摆、谐波减速器柔性或软体机械臂时，至少有一个前提失效；此时不是“再多加一个 PID 参数”就能解决建模问题
+
+<figure class="concept-diagram web-source-figure" data-asset="scheme">
+  <img src="../../assets/figures/web-png/scheme.png" alt="机器人机械臂简化机构图" loading="lazy"/>
+  <figcaption>简化连杆图隐含刚性连杆、固定基座和理想关节等假设；若基座会运动或传动会弹性变形，必须增加状态与动力学项，原图本身不包含这些额外自由度 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_Arm_schemat.png" target="_blank" rel="noopener noreferrer">Arczi325</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 2. 浮动基系统：基座本身也是动态变量
 

@@ -4,6 +4,7 @@
 
 **先修：** C02、C03、C06、C08；**层次：** 重复任务误差 → ILC 更新 → 复合架构 → 收敛条件与部署边界
 
+
 ## 1. 两类学习发生在不同时间轴
 
 实时自适应控制根据当前时刻测量更新内部参数；迭代学习控制（ILC）根据第 $j$ 次运行的整段误差 $e_j(t)$ 改进第 $j+1$ 次同任务的前馈指令；在 ILC 中必须明确：每次运行是否共享初始条件、轨迹时长和任务环境，误差是否按同一时间轴对齐
@@ -49,6 +50,11 @@ $$
 - 扰动观测器估计到的“外力”同时被阻抗控制和模型补偿处理，可能错误抵消真正应当感知的接触力
 
 实现前必须对每个控制层标注它接收什么、输出什么、何时生效、能够直接驱动哪一级接口，以及超时/不一致时的安全状态
+
+<figure class="concept-diagram web-source-figure" data-asset="pidresp">
+  <img src="../../assets/figures/web-png/pidresp.png" alt="含前馈与反馈通道的 PID 调节器结构图" loading="lazy"/>
+  <figcaption>把该图视为一次执行内部的反馈基线；ILC 还要沿试次编号保存并更新前馈输入，因此图中的时间反馈通道不能直接当成跨试次学习律 · 来源：<a href="https://commons.wikimedia.org/wiki/File:PID_regulator_for_non-step_inputs.png" target="_blank" rel="noopener noreferrer">Luca Ghio</a> · <a href="https://creativecommons.org/licenses/by-sa/3.0" target="_blank" rel="noopener noreferrer">CC BY-SA 3.0</a></figcaption>
+</figure>
 
 ## 4. 进阶：标量 ILC 的最小证明
 

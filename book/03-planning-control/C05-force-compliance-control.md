@@ -4,6 +4,7 @@
 
 **先修：** M05、M06、M07、C04；**层次：** 物理阻抗直觉 → 混合力位与阻抗/导纳 → 被动性和工程实现
 
+
 ## 1. 三种目标不是同一回事
 
 **位置控制**关注 $\mathbf x\to\mathbf x_d$；**力控制**关注接触方向的 $\mathbf f\to\mathbf f_d$；**阻抗控制**关注外力与运动偏差之间指定的*动态关系*；机器人被推动时是否移动，取决于所选控制对象、执行器及环境交互，而不是算法名字
@@ -17,6 +18,11 @@ $$
 $\mathbf M_{\mathrm{imp}},\mathbf D_{\mathrm{imp}},\mathbf K_{\mathrm{imp}}$ 分别是**期望任务空间**惯量、阻尼和刚度，不是机器人实际惯性矩阵 $\mathbf M(\mathbf q)$；单自由度单位分别为 kg、N·s/m、N/m；$\mathbf K_{\mathrm{imp}}$ 在这里表示期望刚度，**不同于 C03 中表示加速度反馈微分增益的 $\mathbf K_d$**；使用独立的阻抗增益记号是为了避免符号混乱
 
 单轴恒力作用、无漂移且最后静止时 $\delta_{\mathrm{ss}}=f_{\mathrm{ext}}/k$：刚度越高，位移越小；自然频率 $\omega_n=\sqrt{k/m}$；阻尼比 $\zeta=d/(2\sqrt{mk})$；矩阵多自由度情况下不能逐元使用该标量结论，除非各轴解耦或已在模态坐标下处理
+
+<figure class="concept-diagram web-source-figure" data-asset="rov">
+  <img src="../../assets/figures/web-png/rov.png" alt="水下机器人机械臂真实照片" loading="lazy"/>
+  <figcaption>夹爪与物体接触时，位置偏差和接触力会互相影响；照片只说明交互场景，阻抗或导纳的具体实现由控制接口与传感器决定 · 来源：<a href="https://commons.wikimedia.org/wiki/File:Robotic_ROV_Manipulator_Arm.png" target="_blank" rel="noopener noreferrer">BPLINFO</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a></figcaption>
+</figure>
 
 ## 2. 进阶：阻抗和导纳在实现上的区别
 
