@@ -1,0 +1,15 @@
+{
+  "samples": 120,
+  "max_abs_analytic_vs_central_difference": 2.8841995458606107e-10,
+  "max_abs_spatial_twist_vs_point_velocity": 8.881784197001252e-16,
+  "max_abs_example_error": 0.0,
+  "max_abs_det_formula_error": 2.220446049250313e-16,
+  "max_singular_sigma_min": 2.596507684296413e-16,
+  "max_abs_acceleration_error": 7.063460927270171e-12,
+  "dls_norm_for_unachievable_direction": 0.0,
+  "example_velocity_m_per_s": [
+    -0.07,
+    0.2
+  ],
+  "passed": true
+}

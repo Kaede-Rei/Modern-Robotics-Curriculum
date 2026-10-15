@@ -1,0 +1,28 @@
+{
+  "samples": 240,
+  "seed": 42,
+  "max_absolute_errors": {
+    "poe_dh": 4.440892098500626e-16,
+    "fk_analytic": 4.47545209131181e-16,
+    "orthogonality": 4.440892098500626e-16,
+    "det_rotation": 4.440892098500626e-16,
+    "T_inverse": 4.163336342344337e-16,
+    "jacobian_fd": 2.9982394345040575e-10,
+    "ik_analytic": 4.440892098500626e-16,
+    "ik_numerical": 9.995133843631047e-10
+  },
+  "tolerances": {
+    "poe_dh": 1e-11,
+    "fk_analytic": 1e-11,
+    "orthogonality": 1e-11,
+    "det_rotation": 1e-11,
+    "T_inverse": 1e-11,
+    "jacobian_fd": 3e-09,
+    "ik_analytic": 1e-10,
+    "ik_numerical": 1e-07
+  },
+  "ik_numerical_successes": 240,
+  "unreachable_target_rejected": true,
+  "two_branches_confirmed": true,
+  "singular_rank_confirmed": true
+}

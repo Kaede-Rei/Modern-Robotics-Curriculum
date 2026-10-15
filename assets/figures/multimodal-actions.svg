@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" width="800" height="330" role="img" aria-label="两种示范动作绕过障碍但平均动作碰向障碍"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#135f56"/></marker><marker id="secondary-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#d58a30"/></marker></defs><rect x="0" y="0" width="800" height="330" rx="16" fill="#f9fbfa"/><g font-family="Arial,'Noto Sans CJK SC','Microsoft YaHei',sans-serif" font-size="17" fill="#263b3b">
+ <text x="38" y="37" font-size="22" font-weight="700">多峰示范：平均动作可能无效</text>
+ <circle cx="104" cy="173" r="13" fill="#135f56"/><rect x="332" y="112" width="108" height="121" rx="20" fill="#fce9cf" stroke="#d58a30" stroke-width="3"/>
+ <text x="386" y="177" text-anchor="middle" font-size="16">障碍物</text>
+ <path d="M117 173 Q224 56 373 70 Q547 68 696 160" fill="none" stroke="#135f56" stroke-width="5" marker-end="url(#arrow)"/>
+ <path d="M117 173 Q230 290 382 264 Q547 263 696 174" fill="none" stroke="#3b92ce" stroke-width="5" marker-end="url(#arrow)"/>
+ <path d="M117 173 L696 167" fill="none" stroke="#d8655e" stroke-width="4" stroke-dasharray="10 7"/>
+ <text x="182" y="65" fill="#135f56">可行示范 A</text><text x="181" y="298" fill="#3b92ce">可行示范 B</text><text x="453" y="202" fill="#c14b44" font-size="14">均值路径穿过障碍</text>
+ <text x="74" y="204" font-size="14">起点</text><text x="699" y="195" font-size="14">终点</text></g></svg>

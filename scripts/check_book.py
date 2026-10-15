@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Check the published curriculum and offline reader"""
+"""Verify the curriculum, its embedded resources, and the offline reader"""
 from __future__ import annotations
 import hashlib
+from html.parser import HTMLParser
 import json
 import re
 from pathlib import Path
-from bs4 import BeautifulSoup
 import yaml
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,40 +25,66 @@ bib = (ROOT / 'references/references.bib').read_text(encoding='utf-8')
 bib_ids = re.findall(r'@\w+\{([^,\s]+),', bib)
 assert len(bib_ids) == len(set(bib_ids)), 'duplicate bibliography entry'
 
-# Reader-visible prose must not contain Chinese full stops or internal phase labels
+lab_specs = json.loads((ROOT / 'reader/learning-labs.json').read_text(encoding='utf-8'))
+assert len(lab_specs) == 12 and len({x['id'] for x in lab_specs}) == 12
 source_files = [ROOT / 'README.md'] + list((ROOT / 'book').rglob('*.md'))
-source_files += [ROOT / 'reader/reader.js', ROOT / 'reader/template.html', ROOT / 'reader/arm2r-demo.html']
+source_files += list((ROOT / 'reader').glob('*.html')) + list((ROOT / 'reader').glob('*.js'))
 for file in source_files:
     source = file.read_text(encoding='utf-8')
-    assert chr(0x3002) not in source, f'Chinese full stop in {file}'
+    assert '。' not in source, f'Chinese full stop in {file}'
     assert not re.search(r'\bP[1-7]\s+(?:实验|工程|阶段|的)', source), f'phase metadata in {file}'
 
-html = (ROOT / 'dist/index.html').read_text(encoding='utf-8')
-assert chr(0x3002) not in html
+html_path = ROOT / 'dist/index.html'
+html = html_path.read_text(encoding='utf-8')
+assert '。' not in html
 assert 'generatedAt' not in html
-soup = BeautifulSoup(html, 'html.parser')
-assert not soup.select('script[src],link[href],iframe,object,embed,video[src],audio[src]')
-assert not soup.find_all('img', src=lambda s: bool(s) and not s.startswith('data:'))
-payload = json.loads(soup.find(id='book-payload').string)
+for pattern in (r'<script\b[^>]*\bsrc=', r'<link\b[^>]*\bhref=', r'<iframe\b', r'<object\b', r'<embed\b'):
+    assert not re.search(pattern, html, re.I), f'External resource syntax {pattern}'
+match = re.search(r'<script id="book-payload" type="application/json">(.*?)</script>', html, re.S)
+assert match, 'Missing embedded book data'
+payload = json.loads(match.group(1))
 assert len(payload['pages']) == 50
+
+class ArticleScanner(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.h1 = 0
+        self.math = 0
+        self.images = 0
+        self.labs = []
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'h1': self.h1 += 1
+        if tag == 'math': self.math += 1
+        if tag == 'img':
+            self.images += 1
+            assert (attrs.get('src') or '').startswith('data:image/'), attrs.get('src')
+        if tag == 'a':
+            u = attrs.get('href', '')
+            assert u.startswith(('https://','http://','#','mailto:')), u
+        if 'data-learning-lab' in attrs:
+            self.labs.append(attrs['data-learning-lab'])
+
+math_total = images_total = 0
+all_labs = {}
 for chapter in chapters:
     page = payload['pages'].get(chapter['id'])
-    assert page is not None and len(page['text']) > 120
-    doc = BeautifulSoup(page['html'], 'html.parser')
-    assert doc.find('h1') is not None
-    for img in doc.find_all('img'):
-        assert img.get('src', '').startswith('data:image/')
-    for a in doc.find_all('a'):
-        u = a.get('href', '')
-        assert u.startswith(('https://','http://','#','mailto:')),(chapter['id'], u)
-
+    assert page and len(page['text']) > 120, chapter['id']
+    scan = ArticleScanner()
+    scan.feed(page['html'])
+    assert scan.h1 >= 1, chapter['id']
+    math_total += page['html'].count('<math')
+    images_total += scan.images
+    for lab in scan.labs:
+        all_labs[lab] = chapter['id']
+assert all_labs == {x['id']:x['chapter'] for x in lab_specs}, all_labs
+math_total += payload['pages']['notation']['html'].count('<math')
+assert images_total >= 31, images_total
 report = {
-    'chapters': len(chapters),
-    'parts': len(parts),
-    'bibliography_entries': len(bib_ids),
-    'mathml_elements': sum(len(BeautifulSoup(p['html'],'html.parser').find_all('math')) for p in payload['pages'].values()),
-    'embedded_images': sum(len(BeautifulSoup(p['html'],'html.parser').find_all('img')) for p in payload['pages'].values()),
-    'html_bytes': (ROOT / 'dist/index.html').stat().st_size,
-    'html_sha256': hashlib.sha256((ROOT / 'dist/index.html').read_bytes()).hexdigest(),
+    'chapters':len(chapters), 'parts':len(parts),
+    'interactive_labs':len(all_labs), 'bibliography_entries':len(bib_ids),
+    'mathml_elements':math_total,'embedded_images':images_total,
+    'html_bytes':html_path.stat().st_size,
+    'html_sha256':hashlib.sha256(html_path.read_bytes()).hexdigest()
 }
-print('PASS CURRICULUM INTEGRITY', json.dumps(report, ensure_ascii=False))
+print('PASS CURRICULUM INTEGRITY',json.dumps(report,ensure_ascii=False))

@@ -1,0 +1,31 @@
+{
+  "scope": "deterministic teaching simulations; no hardware, no high-dimensional general MPC/adaptive controller",
+  "second_order_final_error_max": 1.8553612775473738e-05,
+  "computed_torque": {
+    "nominal": {
+      "final_position_error": 1.2285051306255468e-10,
+      "max_abs_position_error": 0.2
+    },
+    "disturbed": {
+      "final_position_error": 0.5440908108236875,
+      "max_abs_position_error": 0.5994799305832477
+    }
+  },
+  "admittance": {
+    "static_displacement_m": 0.28571428571427343,
+    "predicted_static_m": 0.2857142857142857
+  },
+  "robust_bound": {
+    "max_bound_violation": 0.0
+  },
+  "finite_action_mpc": {
+    "terminal_position_error": 0.0048000000000003595,
+    "terminal_speed_m_per_s": 0.0,
+    "max_applied_input": 1.0,
+    "num_steps": 100
+  },
+  "scalar_ilc": {
+    "convergence_factor": 0.11999999999999988,
+    "last_error": 0.0
+  }
+}

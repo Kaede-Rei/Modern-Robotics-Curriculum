@@ -1,0 +1,39 @@
+{
+  "seed": 42,
+  "imitation": {
+    "bc_ood_action_rmse": 0.2663075554268451,
+    "aggregated_ood_action_rmse": 0.02749455210431596,
+    "initial_demonstrations": 150,
+    "aggregated_examples": 1974
+  },
+  "tabular_rl": {
+    "episodes": 3200,
+    "discount_gamma": 0.97,
+    "greedy_start_zero_steps": 6,
+    "greedy_right_actions": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "q_state0_right": 3.878474446999988
+  },
+  "mixture_denoising": {
+    "noisy_action_rmse": 0.5504760511471625,
+    "bayes_denoised_action_rmse": 0.19745307904315537,
+    "low_density_middle_fraction": 0.0,
+    "demonstrations": 8000
+  },
+  "model_shift_and_robust_gain": {
+    "fit_b_source": 1.4000000000000001,
+    "source_one_step_rmse": 1.9311930748393642e-16,
+    "shifted_target_one_step_rmse": 0.5004664490919114,
+    "source_feedback_gain": 0.7142857142857143,
+    "robust_feedback_gain": 1.0256410256410258,
+    "source_gain_worst_contraction": 0.6071428571428571,
+    "robust_gain_worst_contraction": 0.4358974358974359
+  },
+  "experiment_scope": "synthetic illustrative checks; not DAgger, Diffusion Policy, VLA, Dreamer or real robot reproduction"
+}

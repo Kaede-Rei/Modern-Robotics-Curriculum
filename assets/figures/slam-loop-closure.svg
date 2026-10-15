@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" width="800" height="330" role="img" aria-label="位置轨迹图优化回环边与漂移示意"><defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#135f56"/></marker><marker id="secondary-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="#d58a30"/></marker></defs><rect x="0" y="0" width="800" height="330" rx="16" fill="#f9fbfa"/><g font-family="Arial,'Noto Sans CJK SC','Microsoft YaHei',sans-serif" font-size="17" fill="#263b3b">
+ <text x="35" y="37" font-size="22" font-weight="700">回环约束：减少累计漂移</text>
+ <path d="M142 185 L229 115 L348 102 L442 137 L467 229 L335 257 L215 226 L152 199" fill="none" stroke="#a4b9b2" stroke-width="5" stroke-linecap="round" stroke-dasharray="11 8"/>
+ <path d="M142 185 L225 122 L340 122 L419 166 L421 227 L315 238 L224 210 L142 185" fill="none" stroke="#135f56" stroke-width="4"/>
+ <path d="M142 185 L421 227" fill="none" stroke="#d58a30" stroke-width="3" stroke-dasharray="4 5"/>
+ <circle cx="142" cy="185" r="8" fill="#135f56"/><circle cx="421" cy="227" r="8" fill="#d58a30"/>
+ <text x="70" y="209">首次经过</text><text x="440" y="246" fill="#a46c21">回环观测</text>
+ <text x="537" y="108" font-size="18" fill="#135f56">校正轨迹</text><line x1="523" y1="127" x2="595" y2="127" stroke="#135f56" stroke-width="4"/>
+ <text x="537" y="172" font-size="18" fill="#71817c">未校正轨迹</text><line x1="523" y1="190" x2="595" y2="190" stroke="#a4b9b2" stroke-width="4" stroke-dasharray="10 6"/>
+ <text x="537" y="240" font-size="16" fill="#a46c21">新增相对位姿约束</text></g></svg>

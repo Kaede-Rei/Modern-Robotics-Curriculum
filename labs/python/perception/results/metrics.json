@@ -1,0 +1,30 @@
+{
+  "model": "synthetic teaching examples; not real sensor or full SLAM evaluation",
+  "seed": 42,
+  "geometry": {
+    "projection_roundtrip_max_m": 3.3306690738754696e-16,
+    "svd_registration_rotation_frobenius": 8.27679455597721e-16,
+    "svd_registration_translation_m": 3.602348673474181e-15
+  },
+  "state_estimation": {
+    "ekf_position_rmse_m": 0.04645347963688689,
+    "dead_reckoning_rmse_m": 0.830821469537392,
+    "position_fix_count": 70,
+    "mean_nis_2d": 2.234104362696075,
+    "covariance_symmetry_max": 4.336808689942018e-19
+  },
+  "mapping": {
+    "hit_posterior": 0.9961089494163424,
+    "free_posterior": 0.03263497179693796,
+    "unobserved_posterior": 0.5
+  },
+  "pose_graph": {
+    "dead_chain_rmse_m": 0.09733930324301704,
+    "constrained_graph_rmse_m": 0.08201019799386142,
+    "anchored_final_residual_m": 0.0004913599008098402
+  },
+  "fusion": {
+    "fused_scalar": 2.146153846153846,
+    "fused_variance": 0.02769230769230769
+  }
+}

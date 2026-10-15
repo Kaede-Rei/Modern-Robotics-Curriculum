@@ -218,6 +218,13 @@ python labs/python/dynamics/main.py --check
 
 所用实验是显式的 2R 拉格朗日模型，**不等于已独立实现并交叉验证 RNEA、CRBA 或 ABA**；后续扩展到任意 URDF 时可选用 Pinocchio 等成熟动力学库，但必须先核对关节顺序、质量参数及外力坐标定义
 
+
+## 交互观察
+
+拖动下方参数，比较模型输出与本章公式的联系，交互演示采用简化假设，不替代 Python 数值检查或真实机器人验证
+
+<!-- INTERACTIVE:GRAVITY -->
+
 ### 本章自测
 
 1. 从两个连杆质心速度和角速度写出 $K$，推导 $\mathbf M_{12}=I_2+m_2(c_2^2+L_1c_2\cos q_2)$

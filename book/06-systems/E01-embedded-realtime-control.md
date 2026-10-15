@@ -75,6 +75,13 @@ python labs/python/systems/main.py --check
 
 实验**并未运行真实周期调度线程**，不用于评估 CPU、Linux PREEMPT_RT 或 EtherCAT 的真实最坏情况性能
 
+
+## 交互观察
+
+拖动下方参数，比较模型输出与本章公式的联系，交互演示采用简化假设，不替代 Python 数值检查或真实机器人验证
+
+<!-- INTERACTIVE:DEADLINE -->
+
 ### 自测
 
 1. 平均执行时间为 3 ms 是否足以证明 100 Hz 控制环实时可用？缺少哪些证据

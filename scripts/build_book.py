@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import base64
 import hashlib
+import html as html_lib
 import json
 import mimetypes
 from pathlib import Path
@@ -17,6 +18,26 @@ ROOT = Path(__file__).resolve().parent.parent
 CATALOG = ROOT / 'book/catalog.yml'
 TEMPLATE = ROOT / 'reader/template.html'
 OUTPUT = ROOT / 'dist/index.html'
+LABS = json.loads((ROOT / 'reader/learning-labs.json').read_text(encoding='utf-8'))
+LAB_BY_ID = {lab['id'].upper(): lab for lab in LABS}
+
+
+def learning_lab_html(lab: dict) -> str:
+    controls = []
+    for name, title, unit, low, high, value, step in lab['controls']:
+        name, title, unit = map(html_lib.escape, (name, title, unit))
+        controls.append(
+            '<label class="lab-control"><span><span>' + title + '</span><output data-value="' + name + '">' + str(value) +
+            (' ' + unit if unit else '') + '</output></span><input type="range" name="' + name + '" data-unit="' + unit +
+            '" min="' + str(low) + '" max="' + str(high) + '" value="' + str(value) + '" step="' + str(step) + '"></label>'
+        )
+    return ('<section class="learning-lab" aria-label="' + html_lib.escape(lab['title']) + '" data-learning-lab="' + html_lib.escape(lab['id']) + '">' +
+            '<span class="lab-eyebrow">INTERACTIVE CONCEPT</span><h3>' + html_lib.escape(lab['title']) + '</h3>' +
+            '<p class="lab-intro">' + html_lib.escape(lab['description']) + '</p>' +
+            '<canvas width="650" height="262" role="img" aria-label="' + html_lib.escape(lab['title']) + '动态图"></canvas>' +
+            '<div class="lab-controls">' + ''.join(controls) + '</div>' +
+            '<p class="lab-summary" data-lab-summary aria-live="polite"></p>' +
+            '<p class="lab-caveat">教学示意使用简化模型，仅用于观察参数与公式关系，不作为真机性能或安全依据</p></section>')
 
 
 def convert_markdown(path: Path, *, chapter: str) -> dict:
@@ -33,6 +54,14 @@ def convert_markdown(path: Path, *, chapter: str) -> dict:
         if token not in html:
             raise ValueError('M03 is missing the arm2r demo marker')
         html = html.replace(token, (ROOT / 'reader/arm2r-demo.html').read_text(encoding='utf-8'))
+    for lab in LABS:
+        marker = '<!-- INTERACTIVE:' + lab['id'].upper() + ' -->'
+        if lab['chapter'] == chapter:
+            if html.count(marker) != 1:
+                raise ValueError(f'Expected one lab marker {marker} in {chapter}')
+            html = html.replace(marker, learning_lab_html(lab))
+        elif marker in html:
+            raise ValueError(f'Unexpected lab marker {marker} in {chapter}')
     soup = BeautifulSoup(html, 'html.parser')
     # Never leave dependencies on files adjacent to the generated index.html.
     for img in soup.find_all('img'):
@@ -108,8 +137,8 @@ def build():
     # Escaping < prevents attacker-supplied prose from breaking out of JSON script tag.
     raw_json = raw_json.replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     template = TEMPLATE.read_text(encoding='utf-8')
-    style = (ROOT / 'reader/style.css').read_text(encoding='utf-8')
-    script = (ROOT / 'reader/reader.js').read_text(encoding='utf-8')
+    style = (ROOT / 'reader/style.css').read_text(encoding='utf-8') + '\n' + (ROOT / 'reader/learning-labs.css').read_text(encoding='utf-8')
+    script = (ROOT / 'reader/learning-labs.js').read_text(encoding='utf-8') + '\n' + (ROOT / 'reader/reader.js').read_text(encoding='utf-8')
     for marker in ('/*INLINE_STYLE*/', '/*INLINE_SCRIPT*/', '/*INLINE_DATA*/'):
         if template.count(marker) != 1:
             raise ValueError('Template marker missing or repeated: ' + marker)

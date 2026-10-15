@@ -1,0 +1,75 @@
+{
+  "seed": 42,
+  "random_configurations": 250,
+  "max_absolute_errors": {
+    "gravity_gradient": 3.2200428989881402e-09,
+    "mass_symmetry": 0.0,
+    "coriolis_skew": 4.212736826048058e-10,
+    "kinetic_hessian": 2.7130919733053815e-10,
+    "kinetic_from_com": 1.3322676295501878e-15,
+    "lagrange_residual": 1.734931286634378e-06,
+    "energy_power": 3.996202035949636e-09,
+    "id_fd_roundtrip": 3.086420008457935e-14,
+    "statics_virtual_work": 8.881784197001252e-16,
+    "regressor": 3.552713678800501e-15,
+    "contact_acceleration": 4.207945986666612e-16,
+    "contact_force_residual": 4.440892098500626e-16,
+    "impact_restitution": 2.7755575615628914e-17
+  },
+  "tolerances": {
+    "gravity_gradient": 1e-07,
+    "mass_symmetry": 1e-12,
+    "coriolis_skew": 1e-07,
+    "kinetic_hessian": 1e-08,
+    "kinetic_from_com": 1e-10,
+    "lagrange_residual": 3e-06,
+    "energy_power": 1e-07,
+    "id_fd_roundtrip": 1e-10,
+    "statics_virtual_work": 1e-12,
+    "regressor": 1e-11,
+    "contact_acceleration": 1e-10,
+    "contact_force_residual": 1e-10,
+    "impact_restitution": 1e-12
+  },
+  "min_mass_eigenvalue": 0.030625452795235653,
+  "contact_normal_force_N": 4.027121269458379,
+  "normal_impact_impulse_Ns": 0.2119585910248661,
+  "identification": {
+    "base_parameters": [
+      "a",
+      "b",
+      "d",
+      "e",
+      "f",
+      "b1",
+      "b2"
+    ],
+    "true": [
+      1.1462400000000004,
+      0.24640000000000006,
+      0.10924000000000003,
+      15.696000000000002,
+      3.021480000000001,
+      0.07,
+      0.04
+    ],
+    "fitted": [
+      1.1464112772592179,
+      0.2463134727547001,
+      0.10948254225135128,
+      15.695769583153776,
+      3.022252236187994,
+      0.07233465003355416,
+      0.03616535778048802
+    ],
+    "excitation_rank": 7,
+    "weak_excitation_rank": 2,
+    "regressor_condition_number": 5.568836944460533,
+    "train_rows": 1440,
+    "test_rows": 500,
+    "torque_noise_std_Nm": 0.025,
+    "relative_parameter_error": 0.0002852357502032369,
+    "noise_free_test_rmse_Nm": 0.0013684509684062636
+  },
+  "caveat": "Synthetic fixed-base planar 2R, rigid ideal links, frictionless unilateral normal contact; not physical robot validation"
+}

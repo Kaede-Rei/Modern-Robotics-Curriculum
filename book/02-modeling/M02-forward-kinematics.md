@@ -97,4 +97,11 @@ $$
 
 **练习：** 若 TCP 还沿末端 $x$ 轴伸出 $0.10\ \mathrm m$，如何更新 $\mathbf M$？改变 $\mathbf M$ 时，零位空间螺旋轴 $\mathbf S_i$ 是否也必须改变
 
+
+## 交互观察
+
+拖动下方参数，比较模型输出与本章公式的联系，交互演示采用简化假设，不替代 Python 数值检查或真实机器人验证
+
+<!-- INTERACTIVE:FK -->
+
 **参考：** Lynch & Park, *Modern Robotics*, Chapter 4 and Appendix C；Murray, Li & Sastry, *A Mathematical Introduction to Robotic Manipulation*, Chapter 3

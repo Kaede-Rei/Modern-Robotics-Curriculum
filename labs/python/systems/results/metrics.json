@@ -1,0 +1,44 @@
+{
+  "model": "Synthetic teaching simulation; not a hardware real-time/safety validation",
+  "periodic": {
+    "deadline_miss_count": 12,
+    "deadline_miss_rate": 0.01,
+    "response_p99_ms": 9.674692565961992,
+    "response_max_ms": 14.975423149492073,
+    "period_ms": 10.0
+  },
+  "clock": {
+    "raw_clock_max_error_ms": 36.196250000001484,
+    "corrected_clock_max_error_ms": 4.884981308350689e-12,
+    "offset_ms": 35.0,
+    "drift_ppm": 75.0
+  },
+  "pipeline": {
+    "latency_p99_ms": 25.789330068783038,
+    "latency_max_ms": 73.34994644301436,
+    "age_budget_ms": 50.0,
+    "stale_count": 8
+  },
+  "teaching_supervisor": {
+    "states": [
+      "INHIBITED",
+      "INHIBITED",
+      "READY",
+      "ACTIVE",
+      "FAULT_LATCHED",
+      "FAULT_LATCHED",
+      "FAULT_LATCHED",
+      "FAULT_LATCHED",
+      "INHIBITED",
+      "READY",
+      "ACTIVE",
+      "ESTOP_LATCHED",
+      "ESTOP_LATCHED",
+      "INHIBITED",
+      "READY",
+      "ACTIVE"
+    ],
+    "no_spontaneous_fault_reset": true,
+    "estop_remains_latched_without_ack": true
+  }
+}

@@ -97,4 +97,11 @@ $\mathbf q_R$ 和 $-\mathbf q_R$ 代表同一个物理姿态，称作双覆盖�
 2. 在 Python 中生成一个正交矩阵，验证 $\mathbf R^T\mathbf R\approx\mathbf I$ 与 $\det\mathbf R\approx1$；计算 $\mathbf T\mathbf T^{-1}$ 与单位矩阵的误差
 3. 将目标点变换到基座，再经逆变换还原到相机，检查误差来源
 
+
+## 交互观察
+
+拖动下方参数，比较模型输出与本章公式的联系，交互演示采用简化假设，不替代 Python 数值检查或真实机器人验证
+
+<!-- INTERACTIVE:FRAMES -->
+
 **参考：** Lynch & Park, *Modern Robotics*, Sections 3.2–3.3 and Appendix B；Murray, Li & Sastry, *A Mathematical Introduction to Robotic Manipulation*, Chapter 2

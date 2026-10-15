@@ -53,6 +53,13 @@ $$
 
 ![三次和五次时间标定的速度与加速度](../../assets/figures/time-scaling.png)
 
+
+## 交互观察
+
+拖动下方参数，比较模型输出与本章公式的联系，交互演示采用简化假设，不替代 Python 数值检查或真实机器人验证
+
+<!-- INTERACTIVE:TRAJECTORY -->
+
 ### 自测
 
 1. 推导 $\ddot{\mathbf q}$ 中的 $\dot s^2$ 项来自何处

@@ -54,6 +54,13 @@ $$
 
 **实践：** `labs/python/perception/main.py --check` 验证 log-odds 更新及未观测区保持未知；`labs/python/planning/main.py --check` 验证二维静态栅格 A* 路径；二者都不是对 Nav2 整机导航的功能验证
 
+
+## 交互观察
+
+拖动下方参数，比较模型输出与本章公式的联系，交互演示采用简化假设，不替代 Python 数值检查或真实机器人验证
+
+<!-- INTERACTIVE:OCCUPANCY -->
+
 ### 自测
 
 1. 为什么点云障碍可以“存在”，但机器人仍没有安全可通行区
