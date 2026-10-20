@@ -69,6 +69,9 @@ for item in details:
     doc = payload['pages'][item['chapter']]['html']
     assert '#/explain/' + item['id'] in doc
     assert item['anchor'] in doc
+projection_page = BeautifulSoup(payload['pages']['explain:F02-core3-inner-product-projection']['html'], 'html.parser')
+assert {lab['data-projection-lab'] for lab in projection_page.select('[data-projection-lab]')} == {'work', 'fit'}
+assert '<!-- INTERACTIVE:' not in str(projection_page), 'Unexpanded lesson marker'
 assert '部分教学详细讲解' in html
 assert 'data-target="explanations"' in html
 

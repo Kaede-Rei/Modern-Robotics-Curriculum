@@ -7,3 +7,10 @@ explanations:
     title: 秩、零空间与几何约束
     path: book/explanations/F02-core2-rank-nullspace.md
     status: ready
+  - id: F02-core3-inner-product-projection
+    chapter: F02
+    section: 核心 3. 内积、范数与正交投影
+    anchor: 核心-3.-内积范数与正交投影
+    title: 内积、范数与正交投影
+    path: book/explanations/F02-core3-inner-product-projection.md
+    status: ready

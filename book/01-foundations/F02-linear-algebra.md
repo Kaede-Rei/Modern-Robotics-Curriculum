@@ -39,7 +39,9 @@ $$
 
 ## 核心 3. 内积、范数与正交投影
 
-向量内积 $\mathbf a^T\mathbf b$ 与夹角、功和能量直接相关；常用 $2$-范数为 $\|\mathbf x\|_2=\sqrt{\mathbf x^T\mathbf x}$
+可以先把这一节想成“拉箱子”和“沿轨道靠近目标”：斜着拉时，只有沿位移方向的力分量对这段位移做功；目标不在轨道上时，最近的落点就是垂足
+
+向量内积 $\mathbf a^T\mathbf b=\|\mathbf a\|_2\|\mathbf b\|_2\cos\theta$ 衡量两个非零向量的方向对齐程度；恒力的功为 $W=\mathbf F^T\Delta\mathbf p$；常用 $2$-范数 $\|\mathbf x\|_2=\sqrt{\mathbf x^T\mathbf x}$ 衡量长度，而 $\|\mathbf A\mathbf x-\mathbf b\|_2$ 衡量实际输出与目标之间的距离
 
 对 $\mathbf A\in\mathbb R^{m\times n}$、向量 $\mathbf b$，最小二乘问题
 
@@ -47,13 +49,17 @@ $$
 \min_{\mathbf x}\frac12\|\mathbf A\mathbf x-\mathbf b\|_2^2
 $$
 
-在可微情形的一阶驻点条件为
+把矩阵的列看成可以合成输出的方向；最小二乘寻找列空间中离目标最近的输出，最优时剩余残差垂直于每一列，因此一阶驻点条件为
 
 $$
 \mathbf A^T(\mathbf A\mathbf x-\mathbf b)=\mathbf0
 $$
 
 如果 $\mathbf A$ 列满秩，解唯一且为 $(\mathbf A^T\mathbf A)^{-1}\mathbf A^T\mathbf b$；**但数值实现一般不要显式计算这个逆或直接形成正规方程**：可优先使用 QR 或 SVD，以避免平方条件数引起的精度恶化
+
+**直观自检：** 正交只说明“剩下的误差无法沿这些列方向继续减少”，不说明误差已经为零；最近输出唯一，也不保证输入唯一，零空间仍可使多个输入产生同一个输出
+
+详细讲解请查阅：[F02-核心3.内积、范数与正交投影-详细讲解](#/explain/F02-core3-inner-product-projection)
 
 <figure class="concept-diagram web-source-figure" data-asset="projection">
   <img src="../../assets/figures/web-png/projection.png" alt="最小二乘的列空间投影与正交残差" loading="lazy"/>

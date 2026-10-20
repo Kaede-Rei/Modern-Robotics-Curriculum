@@ -47,7 +47,8 @@ python scripts/check_book.py
 
 - 49 章配图已放在对应知识点旁，图注说明图中对象与公式的关系及适用边界
 - 41 项现成网络 PNG 随仓库保存，包含真实机器人照片、官方展示图、机构和算法示意图；新增最小二乘投影、二维高斯分布与 SVD 数据图
-- F02 详细页保留 UR16e 实物照片、OpenArm 官方展示图，以及原有秩、奇异性与冗余交互
+- F02 新增「内积、范数与正交投影」详细讲解，包含拉力做功、斜轨道最小二乘两个离线交互，以及投影算例、正规方程推导和机器人速度解释
+- F02 秩与零空间详细页保留 UR16e 实物照片、OpenArm 官方展示图，以及原有秩、奇异性与冗余交互
 - [图片来源清单](assets/figures/SOURCES.md) 记录作者、许可和教学位置；[JSON 清单](assets/figures/web-png-sources.json) 记录原始 URL、实际下载 URL、尺寸与 SHA-256
 - 构建器禁止在线图片地址；缺图或 PNG 损坏时停止，不会退回网络加载；检查脚本检查所有章节、补充讲解及图片完整性
 - 如需恢复缺失文件，可联网运行 `python scripts/fetch_web_png.py`；已有文件先校验，下载通过解码和哈希验证后才原子写入，遇到源站限流即停止，稍后可续跑
@@ -57,14 +58,17 @@ python scripts/check_book.py
 
 ```bash
 python -m unittest discover -s tests -v
+# 新增详细讲解的交互数学模型检查，需要 Node.js
+node --test tests/projection-lesson.test.js
 python scripts/check_book.py
 # 可选：安装浏览器验收工具后，在断网模式访问全部页面并操作交互控件
 python -m pip install playwright
 python -m playwright install chromium
 python scripts/check_reader_browser.py
+# 也可使用已安装的 Edge：python scripts/check_reader_browser.py --browser-channel msedge
 ```
 
-浏览器验收将 HTML 单独复制到临时目录，禁止网络访问，检查全部配图解码、12 项实验滑块、二维机械臂和 F02 三项演示，以及窄屏布局
+浏览器验收将 HTML 单独复制到临时目录，禁止网络访问，检查全部配图解码、12 项实验滑块、二维机械臂和 F02 五项演示，以及窄屏布局
 
 **运行教学实验**
 

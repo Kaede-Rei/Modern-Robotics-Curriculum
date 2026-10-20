@@ -997,6 +997,10 @@
         {
           "chapter": "M08",
           "section": 2
+        },
+        {
+          "chapter": "explain:F02-core3-inner-product-projection",
+          "section": 5
         }
       ],
       "download_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f2/Least_squares_projection_geometry.png/960px-Least_squares_projection_geometry.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=thumbnail&_=20260316232700",

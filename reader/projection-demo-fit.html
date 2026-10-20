@@ -1,0 +1,16 @@
+<section class="learning-lab projection-lab" data-projection-lab="fit" aria-label="斜轨道上的最小二乘与正交投影交互演示">
+  <span class="lab-eyebrow">ORTHOGONAL PROJECTION</span>
+  <h3>沿轨道移动输出，找离目标最近的落点</h3>
+  <p class="lab-intro">蓝色是目标 b，绿色是实际输出 p = t(2, 1)，橙色是残差 r = b − p；空心圆标出最优垂足，两轴使用相同比例</p>
+  <canvas width="650" height="320" role="img" aria-label="目标向量、轨道、投影垂足和残差；当前位置、距离与正交条件见下方文字"></canvas>
+  <div class="lab-controls">
+    <label class="lab-control"><span>目标第一分量 b₁ <output data-projection-out="bx">1.0</output></span><input name="bx" type="range" min="-4" max="4" step="0.5" value="1"></label>
+    <label class="lab-control"><span>目标第二分量 b₂ <output data-projection-out="by">2.0</output></span><input name="by" type="range" min="-4" max="4" step="0.5" value="2"></label>
+    <label class="lab-control"><span>当前输入 t <output data-projection-out="t">0.0</output></span><input name="t" type="range" min="-3" max="3" step="0.1" value="0"></label>
+  </div>
+  <div class="rank-presets"><button type="button" data-fit-best>移到最优投影</button><button type="button" data-fit-reset>恢复例题</button></div>
+  <p class="lab-summary" data-projection-out="fit" aria-live="polite"></p>
+  <p class="lab-summary" data-projection-out="normal"></p>
+  <p class="lab-caveat" data-projection-out="fit-note"></p>
+  <p class="lab-caveat">无约束二维欧氏最小二乘示意，两分量采用相同尺度；输入滑块范围只为方便观察，不表示实际机器人限位</p>
+</section>

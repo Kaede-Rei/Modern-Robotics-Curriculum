@@ -65,6 +65,13 @@ def convert_markdown(path: Path, *, chapter: str) -> dict:
             if html.count(marker) != 1:
                 raise ValueError('Missing or repeated F02 lesson marker: ' + marker)
             html = html.replace(marker, (ROOT / 'reader' / fragment).read_text(encoding='utf-8'))
+    if chapter == 'explain:F02-core3-inner-product-projection':
+        for name, fragment in {'PROJECTION_WORK': 'projection-demo-work.html',
+                               'PROJECTION_FIT': 'projection-demo-fit.html'}.items():
+            marker = '<!-- INTERACTIVE:' + name + ' -->'
+            if html.count(marker) != 1:
+                raise ValueError('Missing or repeated projection lesson marker: ' + marker)
+            html = html.replace(marker, (ROOT / 'reader' / fragment).read_text(encoding='utf-8'))
     if chapter == 'M03':
         token = '<!-- INTERACTIVE:ARM2R -->'
         if token not in html:
@@ -181,8 +188,8 @@ def build():
     # Escaping < prevents attacker-supplied prose from breaking out of JSON script tag.
     raw_json = raw_json.replace('<', '\\u003c').replace('>', '\\u003e').replace('&', '\\u0026')
     template = TEMPLATE.read_text(encoding='utf-8')
-    style = '\n'.join((ROOT / 'reader' / name).read_text(encoding='utf-8') for name in ('style.css', 'learning-labs.css', 'rank-lesson.css'))
-    script = '\n'.join((ROOT / 'reader' / name).read_text(encoding='utf-8') for name in ('learning-labs.js', 'rank-lesson.js', 'reader.js'))
+    style = '\n'.join((ROOT / 'reader' / name).read_text(encoding='utf-8') for name in ('style.css', 'learning-labs.css', 'rank-lesson.css', 'projection-lesson.css'))
+    script = '\n'.join((ROOT / 'reader' / name).read_text(encoding='utf-8') for name in ('learning-labs.js', 'rank-lesson.js', 'projection-lesson.js', 'reader.js'))
     for marker in ('/*INLINE_STYLE*/', '/*INLINE_SCRIPT*/', '/*INLINE_DATA*/'):
         if template.count(marker) != 1:
             raise ValueError('Template marker missing or repeated: ' + marker)

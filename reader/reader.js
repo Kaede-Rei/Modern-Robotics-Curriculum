@@ -51,7 +51,7 @@ const n=ids.indexOf(id);let prev=null,next=null;
 if(n>=0){prev=n>0?chapters[ids[n-1]]:null;next=n+1<ids.length?chapters[ids[n+1]]:null}
 else if(id==='guide')next=chapters.F01;
 setupPager('prev',prev);setupPager('next',next);document.querySelector('.chapter-pager').hidden=(id==='explanations'||id==='explain');
-refreshToc();initDemos();window.initLearningLabs();window.initRankLessonDemos();
+refreshToc();initDemos();window.initLearningLabs();window.initRankLessonDemos();window.initProjectionLessonDemos();
 if(r.section){requestAnimationFrame(()=>{const el=content.querySelector('#'+CSS.escape(r.section));if(el)el.scrollIntoView({block:'start'})})}else window.scrollTo({top:0,behavior:'instant'});
 }
 function setupPager(which,c){const b=$(which);b.disabled=!c;b.onclick=c?()=>navigate(c.id):null;$(which+'-title').textContent=c?c.id+' '+c.title:'—'}

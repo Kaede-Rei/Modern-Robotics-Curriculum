@@ -1,0 +1,11 @@
+<section class="learning-lab projection-lab" data-projection-lab="work" aria-label="拉力方向与做功交互演示">
+  <span class="lab-eyebrow">INNER PRODUCT</span>
+  <h3>改变拉力方向，看看有多少力沿着位移做功</h3>
+  <p class="lab-intro">拉力大小始终是 10 N，水平位移始终是 2 m；蓝色箭头是力，绿色箭头是沿位移方向的力分量</p>
+  <canvas width="650" height="320" role="img" aria-label="拉力及其水平分量，随角度变化；数值结果见下方文字"></canvas>
+  <div class="lab-controls"><label class="lab-control"><span>力与位移的夹角 <output data-projection-out="angle">60°</output></span><input name="angle" type="range" min="0" max="180" step="1" value="60"></label></div>
+  <div class="rank-presets"><button type="button" data-work-angle="0">同向 0°</button><button type="button" data-work-angle="60">斜拉 60°</button><button type="button" data-work-angle="90">垂直 90°</button><button type="button" data-work-angle="180">反向 180°</button></div>
+  <p class="lab-summary" data-projection-out="work" aria-live="polite"></p>
+  <p class="lab-caveat" data-projection-out="work-note"></p>
+  <p class="lab-caveat">这里只计算恒力对给定位移做的功，不模拟支持力、摩擦或箱子的动力学</p>
+</section>

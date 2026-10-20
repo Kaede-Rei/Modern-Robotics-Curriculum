@@ -1,0 +1,5 @@
+.projection-lab canvas{height:320px;background:#fff}
+.projection-lab .lab-summary+.lab-summary{margin-top:8px}
+.projection-lab .rank-presets{margin:12px 0}
+.projection-lab button:focus-visible{outline:3px solid var(--brand);outline-offset:3px}
+@media(max-width:480px){.learning-lab.projection-lab canvas{height:320px}}
